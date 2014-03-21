@@ -96,58 +96,14 @@ static void cpuid_level(uint32_t level) {
     }
 }
 
-int main(int argc, char **argv) {
-    
-    std::vector<std::pair<uint32_t, uint32_t>> l_s_pairs = { 
-             {0, 0},
-             {1, 0},
-             {2, 0},
-             {3, 0},
-             {4, 0},
-             {4, 1},
-             {4, 2},
-             {4, 3},
-             {4, 4},
-             {5, 0},
-             {6, 0},
-             {7, 0},
-             {7, 1},
-             {8, 0},
-             {9, 0},
-           {0xa, 0},
-           {0xb, 0},
-           {0xb, 1},
-           {0xb, 2},
-           {0xb, 3},
-           {0xc, 0},
-           {0xd, 0},
-           {0xd, 1},
-           {0xd, 2},
-           {0xd, 3},
-           {0xd, 4},
-           {0xd, 5},
-           {0xd, 6},
-           {0xd, 7},
-           {0xd, 8},
-           {0xd, 9},
-           {0xd,10},
-           {0xe, 0},
-           {0xf, 0},
-          {0x10, 0},
-          {0x11, 0},
-          {0x12, 0},
+static void dump_cpuid() {
+    printf("Leaf             Subleaf         EAX         EBX        ECX          EDX\n");
+    printf("------------------------------------------------------------------------\n");
+    cpuid_level(0);
+    cpuid_level(0x80000000);
+}
 
-    {0x80000000, 0},
-    {0x80000001, 0},
-    {0x80000002, 0},
-    {0x80000003, 0},
-    {0x80000004, 0},
-    {0x80000005, 0},
-    {0x80000006, 0},
-    {0x80000007, 0},
-    {0x80000008, 0},
-    }; // l_s_pairs
-    
+int main(int argc, char **argv) {
     // TODO add option checking
     enum  optionIndex { UNKNOWN, HELP, LEAF, SUBLEAF };
     const option::Descriptor usage[] =
@@ -174,32 +130,7 @@ int main(int argc, char **argv) {
     }
     for (option::Option* opt = options[UNKNOWN]; opt; opt = opt->next())
       std::cout << "Unknown option: " << opt->name << "\n";   
-    
-    
-    
-    // Do the work
-    std::cout << "Leaf             Subleaf         EAX         EBX        ECX          EDX" << std::endl;
-    std::cout << "------------------------------------------------------------------------" << std::endl;
-    for (auto l_s: l_s_pairs) {
-        auto leaf = l_s.first;
-        auto subleaf = l_s.second;
-        auto r = do_cpuid(leaf, subleaf);
-        if (r.taken) {
-            std::cout << std::hex << std::showbase << std::setfill(' ') << std::setw(12)
-                      << leaf 
-                      << std::hex << std::showbase << std::setfill(' ') << std::setw(12)
-                      << subleaf 
-                      << std::hex << std::showbase << std::setfill(' ') << std::setw(12)
-                      << r.eax 
-                      << std::hex << std::showbase << std::setfill(' ') << std::setw(12)
-                      << r.ebx 
-                      << std::hex << std::showbase << std::setfill(' ') << std::setw(12)
-                      << r.ecx 
-                      << std::hex << std::showbase << std::setfill(' ') << std::setw(12)
-                      << r.edx 
-                      << std::endl;
-        }
-    }
 
+    dump_cpuid();
     return 0;
 }
