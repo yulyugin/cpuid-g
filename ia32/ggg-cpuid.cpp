@@ -41,6 +41,37 @@ cpuid_result do_cpuid(uint32_t leaf, uint32_t subleaf) {
     return r;
 }
 
+static void cpuid_leaf(uint32_t leaf) {
+    int subleaf = 0;
+    for (subleaf = 0; subleaf > -1; ++subleaf) {
+        cpuid_result r = do_cpuid(leaf, subleaf);
+
+        switch(leaf) {
+            case 0x7:
+                // EAX: Reports the maximum input value for
+                // supported leaf 7 sub-leaves.
+                if (subleaf >= r.eax)
+                    return;
+            case 0xb:
+                // Most of Leaf 0BH output depends on the initial value in ECX.
+                // The EDX output of leaf 0BH is always valid and does not vary
+                // with input value in ECX.
+                // Output value in ECX[7:0] always equals input value in
+                // ECX[7:0].
+                // For sub-leaves that return an invalid level-type of 0 in
+                // ECX[15:8]; EAX and EBX will return 0.
+                // If an input value n in ECX returns the invalid level-type of
+                // 0 in ECX[15:8], other input values with ECX >
+                // n also return 0 in ECX[15:8].
+                if ((r.eax || r.ebx || (r.ecx & ~0xff)) == 0)
+                    return;
+            default:
+                if ((r.eax || r.ebx || r.ecx || r.edx) == 0)
+                    return;
+        }
+    }
+}
+
 int main(int argc, char **argv) {
     
     std::vector<std::pair<uint32_t, uint32_t>> l_s_pairs = { 
