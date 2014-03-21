@@ -69,6 +69,7 @@ static void cpuid_leaf(uint32_t leaf) {
                 if ((r.eax || r.ebx || r.ecx || r.edx) == 0)
                     return;
         }
+        printf("  %#10x  %#10x  0x%08x  0x%08x  0x%08x  0x%08x\n", leaf, subleaf, r.eax, r.ebx, r.ecx, r.edx);
     }
 }
 
@@ -176,6 +177,6 @@ int main(int argc, char **argv) {
                       << std::endl;
         }
     }
-    
+
     return 0;
 }
