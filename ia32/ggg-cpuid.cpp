@@ -11,6 +11,7 @@
 #include <iomanip>
 #include <cstdint>
 #include <vector>
+#include <string.h>
 #include "optionparser.h"
 
 struct cpuid_result {
@@ -43,8 +44,17 @@ cpuid_result do_cpuid(uint32_t leaf, uint32_t subleaf) {
 
 static void cpuid_leaf(uint32_t leaf) {
     int subleaf = 0;
+
+    cpuid_result last_subleaf;
+    memset(&last_subleaf, 0, sizeof(last_subleaf));
+
     for (subleaf = 0; subleaf > -1; ++subleaf) {
         cpuid_result r = do_cpuid(leaf, subleaf);
+
+        // There is no standart way to determine a count of subleaves.
+        // We use assumption that there is no subleaves with the same values.
+        // So if we come on the subleaf with value like in the previous subleaf
+        // we deside that there is no more valid subleaves.
 
         switch(leaf) {
             case 0x7:
@@ -68,8 +78,21 @@ static void cpuid_leaf(uint32_t leaf) {
             default:
                 if ((r.eax || r.ebx || r.ecx || r.edx) == 0)
                     return;
+
+                if (!memcmp(&last_subleaf, &r, sizeof(last_subleaf)))
+                    return;
         }
         printf("  %#10x  %#10x  0x%08x  0x%08x  0x%08x  0x%08x\n", leaf, subleaf, r.eax, r.ebx, r.ecx, r.edx);
+        last_subleaf = r;
+    }
+}
+
+static void cpuid_level(uint32_t level) {
+    cpuid_result r = do_cpuid(level, 0);
+
+    int leaf;
+    for (leaf = level; leaf < r.eax; ++leaf) {
+        cpuid_leaf(leaf);
     }
 }
 
