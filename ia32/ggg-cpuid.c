@@ -29,6 +29,9 @@
 #include <stdint.h>
 #include <unistd.h>
 #include <getopt.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <limits.h>
 
 typedef struct cpuid_result_t {
     uint32_t eax;
@@ -54,6 +57,11 @@ static cpuid_result do_cpuid(uint32_t leaf, uint32_t subleaf) {
     r.ecx = ecx;
     r.edx = edx;
     return r;
+}
+
+static void print_subleaf(uint32_t leaf, uint32_t subleaf, cpuid_result r) {
+    printf("  %#10x  %#10x  0x%08x  0x%08x  0x%08x  0x%08x\n",
+           leaf, subleaf, r.eax, r.ebx, r.ecx, r.edx);
 }
 
 static void cpuid_leaf(uint32_t leaf) {
@@ -96,8 +104,7 @@ static void cpuid_leaf(uint32_t leaf) {
                 if (!memcmp(&last_subleaf, &r, sizeof(last_subleaf)))
                     return;
         }
-        printf("  %#10x  %#10x  0x%08x  0x%08x  0x%08x  0x%08x\n",
-               leaf, subleaf, r.eax, r.ebx, r.ecx, r.edx);
+            print_subleaf(leaf, subleaf, r);
         last_subleaf = r;
     }
 }
@@ -112,8 +119,6 @@ static void cpuid_level(uint32_t level) {
 }
 
 static void dump_cpuid() {
-    printf("Leaf             Subleaf         EAX         EBX        ECX          EDX\n");
-    printf("------------------------------------------------------------------------\n");
     cpuid_level(0);
     cpuid_level(0x80000000);
 }
@@ -131,6 +136,7 @@ int main(int argc, char **argv) {
     // Parse command line arguments
     int opt = 0, opt_idx = 0;
     const char *short_options = "hl:s:";
+    uint32_t leaf = 0xffffffff, subleaf = 0xffffffff;
     static struct option long_opt[] = {
         {"help", no_argument, NULL, 'h'},
         {"leaf", required_argument, NULL, 'l'},
@@ -141,7 +147,42 @@ int main(int argc, char **argv) {
                               long_opt, &opt_idx)) != -1) {
         switch (opt) {
             case 'l':
+                errno = 0;  /* To distinguish success/failure after call */
+                char *endptr;
+                leaf = strtol(optarg, &endptr, 16);
+
+                /* Check for various possible errors */
+
+                if ((errno == ERANGE && (leaf == LONG_MAX || leaf == LONG_MIN))
+                    || (errno != 0 && leaf == 0)) {
+                    perror("strtol");
+                    return 1;
+                }
+
+                if (endptr == optarg) {
+                    fprintf(stderr, "No digits were found in leaf defenition\n");
+                    return 1;
+                }
+
+                break;
             case 's':
+                errno = 0;  /* To distinguish success/failure after call */
+                subleaf = strtol(optarg, &endptr, 16);
+
+                /* Check for various possible errors */
+
+                if ((errno == ERANGE && (subleaf == LONG_MAX || subleaf == LONG_MIN))
+                    || (errno != 0 && subleaf == 0)) {
+                    perror("strtol");
+                    return 1;
+                }
+
+                if (endptr == optarg) {
+                    fprintf(stderr, "No digits were found in subleaf defenition\n");
+                    return 1;
+                }
+
+                break;
             case '?':
                 printf("Use -h, --help options to get usage.\n");
                 return 0;
@@ -152,6 +193,19 @@ int main(int argc, char **argv) {
         }
     }
 
-    dump_cpuid();
+    printf("Leaf             Subleaf         EAX         EBX        ECX          EDX\n");
+    printf("------------------------------------------------------------------------\n");
+
+    if (leaf != 0xffffffff) {
+        if (subleaf != 0xffffffff) {
+            cpuid_result r = do_cpuid(leaf, subleaf);
+            print_subleaf(leaf, subleaf, r);
+        } else {
+            cpuid_leaf(leaf);
+        }
+    } else {
+        dump_cpuid();
+    }
+
     return 0;
 }
