@@ -60,7 +60,7 @@ static cpuid_result do_cpuid(uint32_t leaf, uint32_t subleaf) {
 }
 
 static void print_subleaf(uint32_t leaf, uint32_t subleaf, cpuid_result r) {
-    printf("  %#10x  %#10x  0x%08x  0x%08x  0x%08x  0x%08x\n",
+    printf("  %#10x  %#10x  %#10x  %#10x  %#10x  %#10x\n",
            leaf, subleaf, r.eax, r.ebx, r.ecx, r.edx);
 }
 
