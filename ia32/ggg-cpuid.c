@@ -113,7 +113,7 @@ static void cpuid_level(uint32_t level) {
     cpuid_result r = do_cpuid(level, 0);
 
     int leaf;
-    for (leaf = level; leaf < r.eax; ++leaf) {
+    for (leaf = level; leaf <= r.eax; ++leaf) {
         cpuid_leaf(leaf);
     }
 }
