@@ -48,7 +48,6 @@ static cpuid_result do_cpuid(uint32_t leaf, uint32_t subleaf) {
         "cpuid \n"
         : "=a" (eax), "=b" (ebx), "=c" (ecx), "=d" (edx)
         : "a"(leaf), "c"(subleaf)
-        :
         );
 
     cpuid_result r;
@@ -60,7 +59,7 @@ static cpuid_result do_cpuid(uint32_t leaf, uint32_t subleaf) {
 }
 
 static void print_subleaf(uint32_t leaf, uint32_t subleaf, cpuid_result r) {
-    printf("  %#10x  %#10x  0x%08x  0x%08x  0x%08x  0x%08x\n",
+    printf("  %#10x  %#10x  %#10x  %#10x  %#10x  %#10x\n",
            leaf, subleaf, r.eax, r.ebx, r.ecx, r.edx);
 }
 
@@ -113,7 +112,7 @@ static void cpuid_level(uint32_t level) {
     cpuid_result r = do_cpuid(level, 0);
 
     int leaf;
-    for (leaf = level; leaf < r.eax; ++leaf) {
+    for (leaf = level; leaf <= r.eax; ++leaf) {
         cpuid_leaf(leaf);
     }
 }
