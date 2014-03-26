@@ -47,7 +47,7 @@ union cpuid_t {
 static uint32_t get_cpuid() {
     uint32_t id;
     __asm__ __volatile__ (
-        "mrc p15 0, %0, c0, c0, 0"
+        "mrc p15, 0, %0, c0, c1, 0"
         : "=r" (id)
         );
 
