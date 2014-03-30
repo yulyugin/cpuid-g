@@ -1,2 +1,9 @@
 ggg-cpuid-ia32
 *.swp
+*.cmd
+*.symvers
+*.o
+*.mod.c
+*.ko
+*.order
+.tmp_versions
