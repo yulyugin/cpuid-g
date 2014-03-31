@@ -53,7 +53,7 @@ static struct file_operations fops = {
 static uint32_t do_cpuid(void) {
   uint32_t id = 0xaabbccdd;
   __asm__ __volatile__ (
-    "mrc p15, 0, %0, c0, c1, 0"
+    "mrc p15, 0, %0, c0, c0, 0"
     : "=r" (id)
     );
   return id;
