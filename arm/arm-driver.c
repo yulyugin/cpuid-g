@@ -41,6 +41,7 @@ static ssize_t device_write(struct file *, const char *, size_t, loff_t *);
 
 static int major = 0;
 static atomic_t is_open = ATOMIC_INIT(0);
+static uint32_t cpuid_val = 0;
 
 static struct file_operations fops = {
   .read = device_read,
@@ -49,6 +50,15 @@ static struct file_operations fops = {
   .release = device_release
 };
 
+static uint32_t do_cpuid(void) {
+  uint32_t id = 0xaabbccdd;
+//  __asm__ __volatile__ (
+//    "mrc p15, 0, %0, c0, c1, 0"
+//    : "=r" (id)
+//    );
+  return id;
+}
+
 static int __init test_init(void) {
   if ((major = register_chrdev(0, "ggg-cpuid", &fops)) < 0) {
     printk("Registering the character device failed with %d\n", major);
@@ -56,6 +66,7 @@ static int __init test_init(void) {
   }
   printk(KERN_ALERT "ggg-cpuid module is loaded\n");
   printk("Please, create a dev file with 'mknod /dev/ggg-cpuid c %d 0'.\n", major);
+  cpuid_val = do_cpuid();
   return 0;
 }
 
@@ -68,7 +79,6 @@ module_init(test_init);
 module_exit(test_exit);
 
 static int device_open(struct inode *inode, struct file *file) {
-  // TODO: Added read of CPUID
   if (atomic_add_unless(&is_open, 1, 1) == 0)
     return -EBUSY;
   return 0;
@@ -91,6 +101,11 @@ static ssize_t device_read(struct file *filp,
                            char *buffer,
                            size_t length,
                            loff_t * offset) {
-  // TODO: Implement me.
-  return 0;
+  // Read full CPUID value or nothing
+  if (length < 4)
+    return 0;
+
+  if (put_user(cpuid_val, buffer))
+    return -EFAULT;
+  return 4;
 }
