@@ -101,11 +101,16 @@ static ssize_t device_read(struct file *filp,
                            char *buffer,
                            size_t length,
                            loff_t * offset) {
+  int count = 4;
   // Read full CPUID value or nothing
   if (length < 4)
     return 0;
 
-  if (put_user(cpuid_val, buffer))
-    return -EFAULT;
-  return 4;
+  while (count--) {
+    if (put_user(cpuid_val >> ((3 - count) * 8), buffer))
+      break;
+    buffer++;
+  }
+
+  return 4 - count;
 }
