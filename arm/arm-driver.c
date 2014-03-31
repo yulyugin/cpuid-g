@@ -40,7 +40,7 @@ static ssize_t device_read(struct file *, char *, size_t, loff_t *);
 static ssize_t device_write(struct file *, const char *, size_t, loff_t *);
 
 static int major = 0;
-static int is_open = 0;
+static atomic_t is_open = ATOMIC_INIT(0);
 
 static struct file_operations fops = {
   .read = device_read,
@@ -68,16 +68,14 @@ module_init(test_init);
 module_exit(test_exit);
 
 static int device_open(struct inode *inode, struct file *file) {
-  // TODO: Make me atomic.
   // TODO: Added read of CPUID
-  if (is_open)
+  if (atomic_add_unless(&is_open, 1, 1) == 0)
     return -EBUSY;
-  ++is_open;
   return 0;
 }
 
 static int device_release(struct inode *inode, struct file *file) {
-  --is_open;
+  atomic_dec(&is_open);
   return 0;
 }
 
