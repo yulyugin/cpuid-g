@@ -1,11 +1,11 @@
-obj-m += arm-driver.o
+obj-m += ggg-driver.o
 
 all: ggg-cpuid driver
 
 ggg-cpuid: ggg-cpuid.c
 	gcc -Werror ggg-cpuid.c -o ggg-cpuid
 
-driver: arm-driver.c
+driver: ggg-driver.c
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 
 clean:
