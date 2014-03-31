@@ -26,6 +26,10 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 union cpuid_t {
     struct {
@@ -45,20 +49,32 @@ union cpuid_t {
 #define INTEL   'i'  // 0x69
 
 static uint32_t get_cpuid() {
-    uint32_t id;
-    __asm__ __volatile__ (
-        "mrc p15, 0, %0, c0, c1, 0"
-        : "=r" (id)
-        );
+    int fd = open("/dev/ggg-cpuid", O_RDONLY);
+    if (fd < 0) {
+        perror("open");
+        return -1;
+    }
+    uint32_t id = 0;
+    if (read(fd, &id, 4) < 0) {
+        perror("read");
+        return -1;
+    }
 
+    if (close(fd) < 0) {
+        perror("close");
+        return -1;
+    }
     return id;
 }
 
 int main(int argc, char **argv) {
     union cpuid_t c;
-    c.cpuid = get_cpuid();
+    if ((c.cpuid = get_cpuid()) == 0xffffffff) {
+        fprintf(stderr, "Error in detection of CPUID.\n");
+        return 1;
+    }
 
-    printf("CPUID value: %#10x", c.cpuid);
+    printf("CPUID value: %#10x\n", c.cpuid);
     if (c.implementer == ARM)
         printf("Vendor: ARM\n");
     else if (c.implementer == DEC)
