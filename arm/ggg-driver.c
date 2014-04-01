@@ -30,14 +30,13 @@
 #include <linux/fs.h>
 #include <asm/uaccess.h>
 
-MODULE_LICENSE("BSD-2");
+MODULE_LICENSE("BSD 2-Clause");
 MODULE_AUTHOR("Evgeny Yulyugin <yulyugin@gmail.com>");
 MODULE_DESCRIPTION("ggg-cpuid");
 
 static int device_open(struct inode *, struct file *);
 static int device_release(struct inode *, struct file *);
 static ssize_t device_read(struct file *, char *, size_t, loff_t *);
-static ssize_t device_write(struct file *, const char *, size_t, loff_t *);
 
 static int major = 0;
 static atomic_t is_open = ATOMIC_INIT(0);
@@ -45,7 +44,6 @@ static uint32_t cpuid_val = 0;
 
 static struct file_operations fops = {
   .read = device_read,
-  .write = device_write,
   .open = device_open,
   .release = device_release
 };
@@ -87,14 +85,6 @@ static int device_open(struct inode *inode, struct file *file) {
 static int device_release(struct inode *inode, struct file *file) {
   atomic_dec(&is_open);
   return 0;
-}
-
-static ssize_t device_write(struct file *filp,
-                            const char *buff,
-                            size_t len,
-                            loff_t * off) {
-  printk("Operation isn't supported.\n");
-  return -EINVAL;
 }
 
 static ssize_t device_read(struct file *filp,
