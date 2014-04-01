@@ -30,7 +30,7 @@
 #include <linux/fs.h>
 #include <asm/uaccess.h>
 
-MODULE_LICENSE("GPL");
+MODULE_LICENSE("BSD-2");
 MODULE_AUTHOR("Evgeny Yulyugin <yulyugin@gmail.com>");
 MODULE_DESCRIPTION("ggg-cpuid");
 
