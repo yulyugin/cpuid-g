@@ -93,7 +93,7 @@ int main(int argc, char **argv) {
         printf("Vendor: Intel\n");
 
     for (i = 0; i < cpuids_num; ++i)
-        printf("%-40s %#-10x\n", registers[i], c[i]);
+        printf("%-40s %#10x\n", registers[i], c[i]);
 
     free(c);
     return 0;
