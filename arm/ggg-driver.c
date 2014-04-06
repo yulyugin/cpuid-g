@@ -227,6 +227,6 @@ static ssize_t device_read(struct file *filp,
       if (put_word(id, buffer))
         return -EFAULT;
     case 0:
-      return count;
+      return count * 4;
   }
 }
