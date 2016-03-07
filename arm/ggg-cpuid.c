@@ -80,6 +80,9 @@ static uint32_t *get_cpuid() {
 
 int main(int argc, char **argv) {
     uint32_t *c = get_cpuid();
+    if (!c)
+        return 1;
+
     uint32_t implementer = c[0] >> 24;
     int i = 0;
 
