@@ -7,13 +7,7 @@ arm/  : To build for ARM, use a C compiler capable to generate ARM binaries. Sin
 To measure CPUID value on ARM follow the next steps:
 
     $ make
-    # /sbin/insmod ggg-driver.ko
-    $ dmesg |tail |grep ggg-cpuid
-    [10943.010731] Please, create a dev file with 'mknod /dev/ggg-cpuid c 250 0'.
-    # mknod /dev/ggg-cpuid c 250 0
-    $ ./ggg-cpuid
-    # rm /dev/ggg-cpuid
-    # /sbin/rmmod ggg-driver
+    $ ./ggg-cpuid.sh
 
 ia32/ : To build for IA-32 a.k.a. x86/x86_64, use a C compiler to generate IA-32 binaries.
 
