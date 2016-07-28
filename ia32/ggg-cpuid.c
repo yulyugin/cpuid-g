@@ -59,8 +59,15 @@ static cpuid_result do_cpuid(uint32_t leaf, uint32_t subleaf) {
 }
 
 static void print_subleaf(uint32_t leaf, uint32_t subleaf, cpuid_result r) {
-    printf("  %#10x  %#10x  %#10x  %#10x  %#10x  %#10x\n",
-           leaf, subleaf, r.eax, r.ebx, r.ecx, r.edx);
+    /* 10 bytes for string and one for \0. snprintf will automatically add it */
+    char _leaf[11], _eax[11], _ebx[11], _ecx[11], _edx[11];
+    snprintf(_leaf, 11, "0x%x", leaf);
+    snprintf(_eax, 11, "0x%x", r.eax);
+    snprintf(_ebx, 11, "0x%x", r.ebx);
+    snprintf(_ecx, 11, "0x%x", r.ecx);
+    snprintf(_edx, 11, "0x%x", r.edx);
+    printf("%10s  %10d  %10s  %10s  %10s  %10s\n",
+           _leaf, subleaf, _eax, _ebx, _ecx, _edx);
 }
 
 static void cpuid_leaf(uint32_t leaf) {
@@ -197,8 +204,8 @@ int main(int argc, char **argv) {
         }
     }
 
-    printf("Leaf             Subleaf         EAX         EBX        ECX          EDX\n");
-    printf("------------------------------------------------------------------------\n");
+    printf("Leaf           Subleaf         EAX         EBX        ECX          EDX\n");
+    printf("----------------------------------------------------------------------\n");
 
     if (leaf != 0xffffffff) {
         if (subleaf != 0xffffffff) {
