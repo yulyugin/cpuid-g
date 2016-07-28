@@ -71,12 +71,13 @@ static void print_subleaf(uint32_t leaf, uint32_t subleaf, cpuid_result r) {
 }
 
 static void cpuid_leaf(uint32_t leaf) {
-    int subleaf = 0;
+    uint32_t subleaf = 0;
+    uint32_t max_subleaf = 0xffffffff - 1; /* -1 to avoid infinit loops */
 
     cpuid_result last_subleaf;
     memset(&last_subleaf, 0, sizeof(last_subleaf));
 
-    for (subleaf = 0; subleaf > -1; ++subleaf) {
+    for (subleaf = 0; subleaf <= max_subleaf; subleaf++) {
         cpuid_result r = do_cpuid(leaf, subleaf);
 
         // There is no standart way to determine a count of subleaves.
@@ -88,8 +89,10 @@ static void cpuid_leaf(uint32_t leaf) {
             case 0x7:
                 // EAX: Reports the maximum input value for
                 // supported leaf 7 sub-leaves.
-                if (subleaf > r.eax)
-                    return;
+                if (subleaf == 0)
+                    max_subleaf = r.eax;
+                break;
+
             case 0xb:
                 // Most of Leaf 0BH output depends on the initial value in ECX.
                 // The EDX output of leaf 0BH is always valid and does not vary
@@ -103,11 +106,15 @@ static void cpuid_leaf(uint32_t leaf) {
                 // n also return 0 in ECX[15:8].
                 if ((r.eax || r.ebx || (r.ecx & ~0xff)) == 0)
                     return;
+                break;
+
             case 0x14:
                 // EAX: Reports the maximum number sub-leaves that are supported
                 // in leaf 14H.
-                if (subleaf > r.eax)
-                    return;
+                if (subleaf == 0)
+                    max_subleaf = r.eax;
+                break;
+
             default:
                 if ((r.eax || r.ebx || r.ecx || r.edx) == 0)
                     return;
@@ -115,7 +122,7 @@ static void cpuid_leaf(uint32_t leaf) {
                 if (!memcmp(&last_subleaf, &r, sizeof(last_subleaf)))
                     return;
         }
-            print_subleaf(leaf, subleaf, r);
+        print_subleaf(leaf, subleaf, r);
         last_subleaf = r;
     }
 }
