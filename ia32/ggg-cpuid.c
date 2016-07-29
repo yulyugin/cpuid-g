@@ -32,6 +32,7 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <assert.h>
 
 typedef struct cpuid_result_t {
     uint32_t eax;
@@ -70,9 +71,25 @@ static void print_subleaf(uint32_t leaf, uint32_t subleaf, cpuid_result r) {
            _leaf, subleaf, _eax, _ebx, _ecx, _edx);
 }
 
+static int msb64(uint64_t v)
+{
+    int n = 0;
+    int count = 32;
+    while (count) {
+        if ((v & ~((1ull << count) - 1)) != 0) {
+            n += count;
+            v >>= count;
+        }
+        count /= 2;
+    }
+    return n;
+}
+
 static void cpuid_leaf(uint32_t leaf) {
     uint32_t subleaf = 0;
     uint32_t max_subleaf = 0xffffffff - 1; /* -1 to avoid infinit loops */
+    uint64_t xcr0_mask = 0;
+    uint64_t xss_mask = 0;
 
     cpuid_result last_subleaf;
     memset(&last_subleaf, 0, sizeof(last_subleaf));
@@ -108,6 +125,21 @@ static void cpuid_leaf(uint32_t leaf) {
                 // n also return 0 in ECX[15:8].
                 if ((r.eax || r.ebx || (r.ecx & ~0xff)) == 0)
                     return;
+                break;
+
+            case 0xd:
+                // Each sub-leaf index (starting at position 2) is supported
+                // if it corresponds to a supported bit in either the
+                // XCR0 register or the IA32_XSS MSR.
+                if (subleaf == 0) {
+                    xcr0_mask = (uint64_t)r.edx << 32 | r.eax;
+                    max_subleaf = 2;
+                }
+                if (subleaf == 1) {
+                    xss_mask = (uint64_t)r.edx << 32 | r.eax;
+                    max_subleaf = msb64(xcr0_mask | xss_mask);
+                    assert(max_subleaf >= 1);
+                }
                 break;
 
             default:
