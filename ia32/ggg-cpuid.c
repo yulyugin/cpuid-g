@@ -87,8 +87,10 @@ static void cpuid_leaf(uint32_t leaf) {
 
         switch (leaf) {
             case 0x7:
-                // EAX: Reports the maximum input value for
-                // supported leaf 7 sub-leaves.
+            case 0x14:
+            case 0x17:
+                // Subleaf 0 of several leaves reports the maximum
+                // input value for supported sub-leaves in EAX.
                 if (subleaf == 0)
                     max_subleaf = r.eax;
                 break;
@@ -106,13 +108,6 @@ static void cpuid_leaf(uint32_t leaf) {
                 // n also return 0 in ECX[15:8].
                 if ((r.eax || r.ebx || (r.ecx & ~0xff)) == 0)
                     return;
-                break;
-
-            case 0x14:
-                // EAX: Reports the maximum number sub-leaves that are supported
-                // in leaf 14H.
-                if (subleaf == 0)
-                    max_subleaf = r.eax;
                 break;
 
             default:
