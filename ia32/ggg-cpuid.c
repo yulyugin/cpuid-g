@@ -88,8 +88,7 @@ static int msb64(uint64_t v)
 static void cpuid_leaf(uint32_t leaf) {
     uint32_t subleaf = 0;
     uint32_t max_subleaf = 0xffffffff - 1; /* -1 to avoid infinit loops */
-    uint64_t xcr0_mask = 0;
-    uint64_t xss_mask = 0;
+    uint64_t xsave_mask = 3; /* Mininum 2 subleaves are supported for XSAVE */
 
     cpuid_result last_subleaf;
     memset(&last_subleaf, 0, sizeof(last_subleaf));
@@ -132,14 +131,16 @@ static void cpuid_leaf(uint32_t leaf) {
                 // if it corresponds to a supported bit in either the
                 // XCR0 register or the IA32_XSS MSR.
                 if (subleaf == 0) {
-                    xcr0_mask = (uint64_t)r.edx << 32 | r.eax;
+                    xsave_mask |= (uint64_t)r.edx << 32 | r.eax;
                     max_subleaf = 2;
                 }
                 if (subleaf == 1) {
-                    xss_mask = (uint64_t)r.edx << 32 | r.eax;
-                    max_subleaf = msb64(xcr0_mask | xss_mask);
+                    xsave_mask |= (uint64_t)r.edx << 32 | r.eax;
+                    max_subleaf = msb64(xsave_mask);
                     assert(max_subleaf >= 1);
                 }
+                if (!(xsave_mask & (1 << subleaf))) /* invalid subleaf */
+                    continue;
                 break;
 
             default:
