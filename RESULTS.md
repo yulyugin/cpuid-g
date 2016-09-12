@@ -1,0 +1,16 @@
+This file contains the results of ggg-cpuid launches on different CPUs.
+
+# Intel® IA-32
+
+## Intel® Quark™ SoC X1000
+
+    Leaf           Subleaf         EAX         EBX        ECX          EDX
+    ----------------------------------------------------------------------
+           0x0           0         0x7  0x756e6547  0x6c65746e  0x49656e69
+           0x1           0       0x590     0x10000         0x0  0x8000237b
+           0x2           0         0x1         0x0         0x0         0x0
+           0x7           0         0x1        0x80         0x0         0x0
+           0x7           1         0x0         0x0         0x0         0x0
+    0x80000000           0  0x80000008         0x0         0x0         0x0
+    0x80000001           0         0x0         0x0         0x0    0x100000
+    0x80000008           0      0x2020         0x0         0x0         0x0
