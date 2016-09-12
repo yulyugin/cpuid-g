@@ -1,5 +1,4 @@
-ggg-cpuid
-=========
+# ggg-cpuid
 
 A set of CPU identification tools for Intel IA-32, IA-64 and ARM systems.
 
@@ -12,3 +11,7 @@ To measure CPUID value on ARM follow the next steps:
 ia32/ : To build for IA-32 a.k.a. x86/x86_64, use a C compiler to generate IA-32 binaries.
 
 ia64/ : To build for IA-64 a.k.a. Intel Itanium, use a C++ compiler that is able to generate Itanium binaries.
+
+## Results
+
+You can find the result of ggg-cpuid lanches [here](RESULTS.md).
