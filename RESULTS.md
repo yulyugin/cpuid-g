@@ -70,7 +70,7 @@ This file contains the results of ggg-cpuid launches on different CPUs.
     0x80000007           0         0x0         0x0         0x0       0x100
     0x80000008           0      0x3027         0x0         0x0         0x0
 
-## Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz (formelly SkyLake)
+## Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz (formerly SkyLake)
     Leaf           Subleaf         EAX         EBX        ECX          EDX
     ----------------------------------------------------------------------
            0x0           0        0x16  0x756e6547  0x6c65746e  0x49656e69
