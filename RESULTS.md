@@ -129,7 +129,7 @@ This file contains the results of ggg-cpuid launches on different CPUs.
     0x80000008           0      0x3027         0x0         0x0         0x0
 
 ## Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz (formerly Broadwell)
-Leaf           Subleaf         EAX         EBX        ECX          EDX
+    Leaf           Subleaf         EAX         EBX        ECX          EDX
     ----------------------------------------------------------------------
            0x0           0        0x14  0x756e6547  0x6c65746e  0x49656e69
            0x1           0     0x406f1   0x6200800  0x7ffefbff  0xbfebfbff
