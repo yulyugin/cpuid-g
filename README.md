@@ -14,4 +14,14 @@ ia64/ : To build for IA-64 a.k.a. Intel Itanium, use a C++ compiler that is able
 
 ## Results
 
-You can find the result of ggg-cpuid lanches [here](RESULTS.md).
+### Intel® 64 and IA-32 CPUs
+
+1. [Intel® Quark™ SoC X1000](dumps/ia32/Intel®%20Quark™%20SoC%20X1000.md)
+2. [Intel® Xeon Phi™ 7290](dumps/ia32/Intel®%20Xeon%20Phi™%207290.md) (formerly Knigts Landing)
+3. Intel® Core™ and Xeon® CPUs:
+
+   | Codename  | Client variant                                                   | Server variant                                                         |
+   | ---       | ---                                                              | ---                                                                    |
+   | Haswell   | [Intel® Core™ i5-4200U](dumps/ia32/Intel®%20Core™%20i5-4200U.md) | [Intel® Xeon® E5-2680 v3](dumps/ia32/Intel®%20Xeon®%20E5-2680%20v3.md) |
+   | Broadwell | [Intel® Core™ i5-5300U](dumps/ia32/Intel®%20Core™%20i5-5300U.md) | [Intel® Xeon® E5-2680 v4](dumps/ia32/Intel®%20Xeon®%20E5-2680%20v4.md) |
+   | Skylake   | [Intel® Core™ i7-6700K](dumps/ia32/Intel®%20Core™%20i7-6700K.md) |                                                                        |
