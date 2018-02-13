@@ -88,7 +88,10 @@ static int msb64(uint64_t v)
 static void cpuid_leaf(uint32_t leaf) {
     uint32_t subleaf = 0;
     uint32_t max_subleaf = 0xffffffff - 1; /* -1 to avoid infinit loops */
-    uint64_t xsave_mask = 3; /* Mininum 2 subleaves are supported for XSAVE */
+
+    /* Some leaves specify mask of valid subleaves if leaf 0.
+     * Subleaf 0 is always valid. */
+    uint64_t subleaf_mask = 1;
 
     cpuid_result last_subleaf;
     memset(&last_subleaf, 0, sizeof(last_subleaf));
@@ -131,16 +134,34 @@ static void cpuid_leaf(uint32_t leaf) {
                 // if it corresponds to a supported bit in either the
                 // XCR0 register or the IA32_XSS MSR.
                 if (subleaf == 0) {
-                    xsave_mask |= (uint64_t)r.edx << 32 | r.eax;
-                    max_subleaf = 2;
-                }
-                if (subleaf == 1) {
-                    xsave_mask |= (uint64_t)r.edx << 32 | r.eax;
-                    max_subleaf = msb64(xsave_mask);
-                    assert(max_subleaf >= 1);
-                }
-                if (!(xsave_mask & (1 << subleaf))) /* invalid subleaf */
+                    subleaf_mask |= (uint64_t)r.edx << 32 | r.eax;
+                } else if (subleaf == 1) {
+                    subleaf_mask |= (uint64_t)r.edx << 32 | r.eax;
+                    max_subleaf = msb64(subleaf_mask);
+                } else if (!(subleaf_mask & (1 << subleaf))) {
+                    /* invalid subleaf */
                     continue;
+                }
+                break;
+
+            case 0xf:
+                if (subleaf == 0) {
+                    subleaf_mask |= r.edx;
+                    max_subleaf = msb64(subleaf_mask);
+                } else if (!(subleaf_mask & (1 << subleaf))) {
+                    /* invalid subleaf */
+                    continue;
+                }
+                break;
+
+            case 0x10:
+                if (subleaf == 0) {
+                    subleaf_mask |= r.ebx;
+                    max_subleaf = msb64(subleaf_mask);
+                } else if (!(subleaf_mask & (1 << subleaf))) {
+                    /* invalid subleaf */
+                    continue;
+                }
                 break;
 
             default:
