@@ -27,4 +27,4 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
    | Sandy Bridge | [Intel® Core™ i7-2600](dumps/ia32/Intel®%20Core™%20i7-2600.md)         |                                                                        |
    | Haswell      | [Intel® Core™ i5-4200U](dumps/ia32/Intel®%20Core™%20i5-4200U.md)       | [Intel® Xeon® E5-2680 v3](dumps/ia32/Intel®%20Xeon®%20E5-2680%20v3.md) |
    | Broadwell    | [Intel® Core™ i5-5300U](dumps/ia32/Intel®%20Core™%20i5-5300U.md)       | [Intel® Xeon® E5-2680 v4](dumps/ia32/Intel®%20Xeon®%20E5-2680%20v4.md) |
-   | Skylake      | [Intel® Core™ i7-6700K](dumps/ia32/Intel®%20Core™%20i7-6700K.md)       |                                                                        |
+   | Skylake      | [Intel® Core™ i7-6700K](dumps/ia32/Intel®%20Core™%20i7-6700K.md)       | [Intel® Xeon® Gold 6140](dumps/ia32/Intel®%20Xeon®%20Gold%206140.md)   |
