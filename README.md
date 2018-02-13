@@ -20,10 +20,11 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
 2. [Intel® Xeon Phi™ 7290](dumps/ia32/Intel®%20Xeon%20Phi™%207290.md) (formerly Knigts Landing)
 3. Intel® Core™ and Xeon® CPUs:
 
-   | Codename  | Client variant                                                         | Server variant                                                         |
-   | ---       | ---                                                                    | ---                                                                    |
-   | Merom     | [Intel® Core™2 T7400](dumps/ia32/Intel®%20Core™2%20T7400.md)           |                                                                        |
-   | Penryn    | [Intel® Core™2 Duo P9500](dumps/ia32/Intel®%20Core™2%20Duo%20P9500.md) |                                                                        |
-   | Haswell   | [Intel® Core™ i5-4200U](dumps/ia32/Intel®%20Core™%20i5-4200U.md)       | [Intel® Xeon® E5-2680 v3](dumps/ia32/Intel®%20Xeon®%20E5-2680%20v3.md) |
-   | Broadwell | [Intel® Core™ i5-5300U](dumps/ia32/Intel®%20Core™%20i5-5300U.md)       | [Intel® Xeon® E5-2680 v4](dumps/ia32/Intel®%20Xeon®%20E5-2680%20v4.md) |
-   | Skylake   | [Intel® Core™ i7-6700K](dumps/ia32/Intel®%20Core™%20i7-6700K.md)       |                                                                        |
+   | Codename     | Client variant                                                         | Server variant                                                         |
+   | ---          | ---                                                                    | ---                                                                    |
+   | Merom        | [Intel® Core™2 T7400](dumps/ia32/Intel®%20Core™2%20T7400.md)           |                                                                        |
+   | Penryn       | [Intel® Core™2 Duo P9500](dumps/ia32/Intel®%20Core™2%20Duo%20P9500.md) |                                                                        |
+   | Sandy Bridge | [Intel® Core™ i7-2600](dumps/ia32/Intel®%20Core™%20i7-2600.md)         |                                                                        |
+   | Haswell      | [Intel® Core™ i5-4200U](dumps/ia32/Intel®%20Core™%20i5-4200U.md)       | [Intel® Xeon® E5-2680 v3](dumps/ia32/Intel®%20Xeon®%20E5-2680%20v3.md) |
+   | Broadwell    | [Intel® Core™ i5-5300U](dumps/ia32/Intel®%20Core™%20i5-5300U.md)       | [Intel® Xeon® E5-2680 v4](dumps/ia32/Intel®%20Xeon®%20E5-2680%20v4.md) |
+   | Skylake      | [Intel® Core™ i7-6700K](dumps/ia32/Intel®%20Core™%20i7-6700K.md)       |                                                                        |
