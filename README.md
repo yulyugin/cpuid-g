@@ -1,9 +1,9 @@
 # ggg-cpuid
 
-A set of CPU identification tools for Intel® IA-32, IA-64 and ARM systems.
+A set of CPU identification tools for Intel® IA-32, IA-64 and ARM® systems.
 
-arm/  : To build for ARM®, use a C compiler capable to generate ARM binaries. Since identification registers is a privileged resource on this architecture, a Linux kernel driver has to be loaded. This requires root privileges.
-To measure CPUID value on ARM follow the next steps:
+arm/  : To build for ARM®, use a C compiler capable to generate ARM® binaries. Since identification registers is a privileged resource on this architecture, a Linux kernel driver has to be loaded. This requires root privileges.
+To measure CPUID value on ARM® follow the next steps:
 
     $ make
     $ ./ggg-cpuid.sh
