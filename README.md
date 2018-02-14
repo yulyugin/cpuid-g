@@ -2,7 +2,7 @@
 
 A set of CPU identification tools for Intel® IA-32, IA-64 and ARM systems.
 
-arm/  : To build for ARM, use a C compiler capable to generate ARM binaries. Since identification registers is a privileged resource on this architecture, a Linux kernel driver has to be loaded. This requires root privileges.
+arm/  : To build for ARM®, use a C compiler capable to generate ARM binaries. Since identification registers is a privileged resource on this architecture, a Linux kernel driver has to be loaded. This requires root privileges.
 To measure CPUID value on ARM follow the next steps:
 
     $ make
@@ -29,6 +29,10 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
    | Broadwell    | [Intel® Core™ i5-5300U](dumps/ia32/Intel®%20Core™%20i5-5300U.md)       | [Intel® Xeon® E5-2680 v4](dumps/ia32/Intel®%20Xeon®%20E5-2680%20v4.md) |
    | Skylake      | [Intel® Core™ i7-6700K](dumps/ia32/Intel®%20Core™%20i7-6700K.md)       | [Intel® Xeon® Gold 6140](dumps/ia32/Intel®%20Xeon®%20Gold%206140.md)   |
 
-### Intel® IA-64 a.k.a. Intel® Itanium®
+### Intel® IA-64 a.k.a. Intel® Itanium® CPUs
 
 1. [Intel® Itanium® 9100](dumps/ia64/Intel®%20Itanium®%209100.md) (formerly Montvale)
+
+### ARM® CPUs
+
+1. [ARM1176JZFS](dumps/arm/ARM1176JZFS.md)
