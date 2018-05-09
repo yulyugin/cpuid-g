@@ -105,6 +105,12 @@ static void cpuid_leaf(uint32_t leaf) {
         // we deside that there is no more valid subleaves.
 
         switch (leaf) {
+            case 0x1:
+                // Clear "Initial APIC ID" field.
+                // Always pretend that we run on CPU 0.
+                r.ebx &= 0xffffff;
+                break;
+
             case 0x7:
             case 0x14:
             case 0x17:
