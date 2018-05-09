@@ -163,14 +163,14 @@ static void cpuid_leaf(uint32_t leaf) {
                     continue;
                 }
                 break;
-
-            default:
-                if ((r.eax || r.ebx || r.ecx || r.edx) == 0)
-                    return;
-
-                if (!memcmp(&last_subleaf, &r, sizeof(last_subleaf)))
-                    return;
         }
+
+        if ((r.eax || r.ebx || r.ecx || r.edx) == 0)
+            return;
+
+        if (!memcmp(&last_subleaf, &r, sizeof(last_subleaf)))
+            return;
+
         print_subleaf(leaf, subleaf, r);
         last_subleaf = r;
     }
