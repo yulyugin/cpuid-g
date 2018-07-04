@@ -29,7 +29,6 @@
 #include <stdint.h>
 #include <unistd.h>
 #include <getopt.h>
-#include <errno.h>
 #include <stdlib.h>
 #include <limits.h>
 #include <assert.h>
@@ -220,41 +219,10 @@ int main(int argc, char **argv) {
                               long_opt, &opt_idx)) != -1) {
         switch (opt) {
             case 'l':
-                errno = 0;  /* To distinguish success/failure after call */
-                char *endptr;
-                leaf = strtol(optarg, &endptr, 16);
-
-                /* Check for various possible errors */
-
-                if ((errno == ERANGE && (leaf == LONG_MAX || leaf == LONG_MIN))
-                    || (errno != 0 && leaf == 0)) {
-                    perror("strtol");
-                    return 1;
-                }
-
-                if (endptr == optarg) {
-                    fprintf(stderr, "No digits were found in leaf defenition\n");
-                    return 1;
-                }
-
+                leaf = strtol(optarg, NULL, 16);
                 break;
             case 's':
-                errno = 0;  /* To distinguish success/failure after call */
-                subleaf = strtol(optarg, &endptr, 16);
-
-                /* Check for various possible errors */
-
-                if ((errno == ERANGE && (subleaf == LONG_MAX || subleaf == LONG_MIN))
-                    || (errno != 0 && subleaf == 0)) {
-                    perror("strtol");
-                    return 1;
-                }
-
-                if (endptr == optarg) {
-                    fprintf(stderr, "No digits were found in subleaf defenition\n");
-                    return 1;
-                }
-
+                subleaf = strtol(optarg, NULL, 16);
                 break;
             case '?':
                 printf("Use -h, --help options to get usage.\n");
