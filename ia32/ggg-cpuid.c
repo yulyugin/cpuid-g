@@ -30,8 +30,6 @@
 #include <unistd.h>
 #include <getopt.h>
 #include <stdlib.h>
-#include <limits.h>
-#include <assert.h>
 
 typedef struct cpuid_result_t {
     uint32_t eax;
