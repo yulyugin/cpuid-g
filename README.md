@@ -31,6 +31,7 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
    | Broadwell    | [Intel® Core™ i5-5300U](dumps/ia32/Intel(R)%20Core(TM)%20i5-5300U.md)       | [Intel® Xeon® E5-2680 v4](dumps/ia32/Intel(R)%20Xeon(R)%20E5-2680%20v4.md) |
    | Skylake      | [Intel® Core™ i7-6700K](dumps/ia32/Intel(R)%20Core(TM)%20i7-6700K.md)       | [Intel® Xeon® Gold 6140](dumps/ia32/Intel(R)%20Xeon(R)%20Gold%206140.md)   |
    | Kaby Lake    | [Intel® Core™ i7-7700U](dumps/ia32/Intel(R)%20Core(TM)%20i7-7700U.md)       |                                                                            |
+   | Coffee Lake  | [Intel® Core™ i7-8559U](dumps/ia32/Intel(R)%20Core(TM)%20i7-8559U.md)       |                                                                            |
 
 4. [AMD Ryzen™ Threadripper™ 1950X](dumps/ia32/AMD%20Ryzen%20Threadripper%201950X.md)
 
