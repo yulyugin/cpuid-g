@@ -20,18 +20,34 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
 2. [Intel® Xeon Phi™ 7290](dumps/ia32/Intel(R)%20Xeon%20Phi(TM)%207290.md) (formerly Knigts Landing)
 3. Intel® Core™ and Xeon® CPUs:
 
-   | Codename     | Client variant                                                              | Server variant                                                             |
-   | ---          | ---                                                                         | ---                                                                        |
-   | Merom        | [Intel® Core™2 T7400](dumps/ia32/Intel(R)%20Core(TM)2%20T7400.md)           |                                                                            |
-   | Penryn       | [Intel® Core™2 Duo P9500](dumps/ia32/Intel(R)%20Core(TM)2%20Duo%20P9500.md) |                                                                            |
-   | Westmere     |                                                                             | [Intel® Xeon® X5690](dumps/ia32/Intel(R)%20Xeon(R)%20X5690.md)             |
-   | Sandy Bridge | [Intel® Core™ i7-2600](dumps/ia32/Intel(R)%20Core(TM)%20i7-2600.md)         | [Intel® Xeon® E5-2680](dumps/ia32/Intel(R)%20Xeon(R)%20E5-2680.md)         |
-   | Ivy Bridge   | [Intel® Core™ i7-3770](dumps/ia32/Intel(R)%20Core(TM)%20i7-3770.md)         | [Intel® Xeon® E5-2680 v2](dumps/ia32/Intel(R)%20Xeon(R)%20E5-2680%20v2.md) |
-   | Haswell      | [Intel® Core™ i5-4200U](dumps/ia32/Intel(R)%20Core(TM)%20i5-4200U.md)       | [Intel® Xeon® E5-2680 v3](dumps/ia32/Intel(R)%20Xeon(R)%20E5-2680%20v3.md) |
-   | Broadwell    | [Intel® Core™ i5-5300U](dumps/ia32/Intel(R)%20Core(TM)%20i5-5300U.md)       | [Intel® Xeon® E5-2680 v4](dumps/ia32/Intel(R)%20Xeon(R)%20E5-2680%20v4.md) |
-   | Skylake      | [Intel® Core™ i7-6700K](dumps/ia32/Intel(R)%20Core(TM)%20i7-6700K.md)       | [Intel® Xeon® Gold 6140](dumps/ia32/Intel(R)%20Xeon(R)%20Gold%206140.md)   |
-   | Kaby Lake    | [Intel® Core™ i7-7700U](dumps/ia32/Intel(R)%20Core(TM)%20i7-7700U.md)       |                                                                            |
-   | Coffee Lake  | [Intel® Core™ i7-8559U](dumps/ia32/Intel(R)%20Core(TM)%20i7-8559U.md)       |                                                                            |
+   | Codename     | Client variant              | Server variant              |
+   | ---          | ---                         | ---                         |
+   | Merom        | [Intel® Core™2 T7400][]     |                             |
+   | Penryn       | [Intel® Core™2 Duo P9500][] |                             |
+   | Westmere     |                             | [Intel® Xeon® X5690][]      |
+   | Sandy Bridge | [Intel® Core™ i7-2600][]    | [Intel® Xeon® E5-2680][]    |
+   | Ivy Bridge   | [Intel® Core™ i7-3770][]    | [Intel® Xeon® E5-2680 v2][] |
+   | Haswell      | [Intel® Core™ i5-4200U][]   | [Intel® Xeon® E5-2680 v3][] |
+   | Broadwell    | [Intel® Core™ i5-5300U][]   | [Intel® Xeon® E5-2680 v4][] |
+   | Skylake      | [Intel® Core™ i7-6700K][]   | [Intel® Xeon® Gold 6140][]  |
+   | Kaby Lake    | [Intel® Core™ i7-7700U][]   |                             |
+   | Coffee Lake  | [Intel® Core™ i7-8559U][]   |                             |
+
+[Intel® Core™2 T7400]: dumps/ia32/Intel(R)%20Core(TM)2%20T7400.md
+[Intel® Core™2 Duo P9500]: dumps/ia32/Intel(R)%20Core(TM)2%20Duo%20P9500.md
+[Intel® Xeon® X5690]: dumps/ia32/Intel(R)%20Xeon(R)%20X5690.md
+[Intel® Core™ i7-2600]: dumps/ia32/Intel(R)%20Core(TM)%20i7-2600.md
+[Intel® Xeon® E5-2680]: dumps/ia32/Intel(R)%20Xeon(R)%20E5-2680.md
+[Intel® Core™ i7-3770]: dumps/ia32/Intel(R)%20Core(TM)%20i7-3770.md
+[Intel® Xeon® E5-2680 v2]: dumps/ia32/Intel(R)%20Xeon(R)%20E5-2680%20v2.md
+[Intel® Core™ i5-4200U]: dumps/ia32/Intel(R)%20Core(TM)%20i5-4200U.md
+[Intel® Xeon® E5-2680 v3]: dumps/ia32/Intel(R)%20Xeon(R)%20E5-2680%20v3.md
+[Intel® Core™ i5-5300U]: dumps/ia32/Intel(R)%20Core(TM)%20i5-5300U.md
+[Intel® Xeon® E5-2680 v4]: dumps/ia32/Intel(R)%20Xeon(R)%20E5-2680%20v4.md
+[Intel® Core™ i7-6700K]: dumps/ia32/Intel(R)%20Core(TM)%20i7-6700K.md
+[Intel® Xeon® Gold 6140]: dumps/ia32/Intel(R)%20Xeon(R)%20Gold%206140.md
+[Intel® Core™ i7-7700U]: dumps/ia32/Intel(R)%20Core(TM)%20i7-7700U.md
+[Intel® Core™ i7-8559U]: dumps/ia32/Intel(R)%20Core(TM)%20i7-8559U.md
 
 4. [AMD Ryzen™ Threadripper™ 1950X](dumps/ia32/AMD%20Ryzen%20Threadripper%201950X.md)
 
