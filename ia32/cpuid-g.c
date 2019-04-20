@@ -194,8 +194,8 @@ static void dump_cpuid() {
 }
 
 static void print_help() {
-    printf("ggg-cpuid-ia32\n\n");
-    printf("USAGE: ggg-cpuid [options]\n\n");
+    printf("cpuid--g\n\n");
+    printf("USAGE: cpuid-g [options]\n\n");
     printf("Options:\n");
     printf("\t-h, --help\tPrint usage and exit.\n");
     printf("\t-l, --leaf\tPrint just this leaf\n");

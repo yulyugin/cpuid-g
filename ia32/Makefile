@@ -1,5 +1,5 @@
-all: ggg-cpuid.c
-	gcc -Werror ggg-cpuid.c -o ggg-cpuid-ia32
+all: cpuid-g.c
+	gcc -Werror cpuid-g.c -o cpuid-g
 
 clean:
-	rm ggg-cpuid-ia32
+	rm cpuid-g
