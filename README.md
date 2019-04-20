@@ -1,4 +1,4 @@
-# ggg-cpuid
+# cpuid-g
 
 A set of CPU identification tools for Intel® IA-32, IA-64 and ARM® systems.
 
@@ -6,7 +6,7 @@ arm/  : To build for ARM®, use a C compiler capable to generate ARM® binaries.
 To measure CPUID value on ARM® follow the next steps:
 
     $ make
-    $ ./ggg-cpuid.sh
+    $ ./cpuid-g.sh
 
 ia32/ : To build for Intel® IA-32 a.k.a. x86/x86_64, use a C compiler to generate Intel® IA-32 binaries.
 
