@@ -1,4 +1,4 @@
-Copyright 2014, Grigory Rechistov and Evgeny Yulyugin
+Copyright 2014-2019, Evgeny Yulyugin and contributors.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
