@@ -1,13 +1,13 @@
-obj-m += ggg-driver.o
+obj-m += cpuid-g-driver.o
 
-all: ggg-cpuid driver
+all: cpuid-g driver
 
-ggg-cpuid: ggg-cpuid.c
-	gcc -Werror ggg-cpuid.c -o ggg-cpuid
+cpuid-g: cpuid-g.c
+	gcc -Werror cpuid-g.c -o cpuid-g
 
-driver: ggg-driver.c
+driver: cpuid-g-driver.c
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 
 clean:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
-	rm -rf ggg-cpuid
+	rm -rf cpuid-g

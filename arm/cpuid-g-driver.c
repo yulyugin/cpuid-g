@@ -33,48 +33,48 @@
 
 MODULE_LICENSE("BSD 2-Clause");
 MODULE_AUTHOR("Evgeny Yulyugin <yulyugin@gmail.com>");
-MODULE_DESCRIPTION("ggg-cpuid");
+MODULE_DESCRIPTION("cpuid-g");
 
-static int ggg_cpuid_open(struct inode *, struct file *);
-static int ggg_cpuid_release(struct inode *, struct file *);
-static ssize_t ggg_cpuid_read(struct file *, char *, size_t, loff_t *);
+static int cpuid_g_open(struct inode *, struct file *);
+static int cpuid_g_release(struct inode *, struct file *);
+static ssize_t cpuid_g_read(struct file *, char *, size_t, loff_t *);
 
 static atomic_t is_open = ATOMIC_INIT(0);
 
 static const struct file_operations fops = {
     .owner = THIS_MODULE,
-    .read = ggg_cpuid_read,
-    .open = ggg_cpuid_open,
-    .release = ggg_cpuid_release,
+    .read = cpuid_g_read,
+    .open = cpuid_g_open,
+    .release = cpuid_g_release,
 };
 
-static struct miscdevice ggg_cpuid_dev = {
+static struct miscdevice cpuid_g_dev = {
     MISC_DYNAMIC_MINOR,
-    "ggg-cpuid",
+    "cpuid-g",
     &fops
 };
 
 static int __init
-ggg_cpuid_init(void)
+cpuid_g_init(void)
 {
-    int ret = misc_register(&ggg_cpuid_dev);
+    int ret = misc_register(&cpuid_g_dev);
     if (ret)
-        printk(KERN_ERR "Unable to register ggg-cpuid device\n");
+        printk(KERN_ERR "Unable to register cpuid-g device\n");
 
     return ret;
 }
 
 static void __exit
-ggg_cpuid_exit(void)
+cpuid_g_exit(void)
 {
-    misc_deregister(&ggg_cpuid_dev);
+    misc_deregister(&cpuid_g_dev);
 }
 
-module_init(ggg_cpuid_init);
-module_exit(ggg_cpuid_exit);
+module_init(cpuid_g_init);
+module_exit(cpuid_g_exit);
 
 static int
-ggg_cpuid_open(struct inode *inode, struct file *file)
+cpuid_g_open(struct inode *inode, struct file *file)
 {
     if (atomic_add_unless(&is_open, 1, 1) == 0)
       return -EBUSY;
@@ -82,7 +82,7 @@ ggg_cpuid_open(struct inode *inode, struct file *file)
 }
 
 static int
-ggg_cpuid_release(struct inode *inode, struct file *file)
+cpuid_g_release(struct inode *inode, struct file *file)
 {
     atomic_dec(&is_open);
     return 0;
@@ -101,9 +101,9 @@ put_word(uint32_t cpuid_val, char *buffer)
 }
 
 static ssize_t
-ggg_cpuid_read(struct file *filp, char *buffer, size_t length, loff_t *offset)
+cpuid_g_read(struct file *filp, char *buffer, size_t length, loff_t *offset)
 {
-   int count = 0;
+    int count = 0;
     uint32_t id = 0;
 
     if (length < 0)

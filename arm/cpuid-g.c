@@ -61,7 +61,7 @@ const char *registers[] = {"Main ID Register",
 #define INTEL   'i'  // 0x69
 
 static uint32_t *get_cpuid() {
-    int fd = open("/dev/ggg-cpuid", O_RDONLY);
+    int fd = open("/dev/cpuid-g", O_RDONLY);
     if (fd < 0) {
         perror("open");
         return NULL;

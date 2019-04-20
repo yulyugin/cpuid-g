@@ -1,9 +1,9 @@
-ggg-cpuid-ia32
-ggg-cpuid
+cpuid-g
 *.swp
 *.cmd
 *.symvers
 *.o
+*.d
 *.mod.c
 *.ko
 *.order
