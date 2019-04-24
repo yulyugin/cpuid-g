@@ -23,7 +23,7 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
    | Codename     | Client variant                                                                    | Server variant
    | ---          | ---                                                                               | ---
    | Merom        | [Intel® Core™2 T7400]                                                             |
-   | Penryn       | [Intel® Core™2 Duo P9500]                                                         |
+   | Penryn       | [Intel® Core™2 Duo P9500]<br>[Intel® Core™2 Duo T9600]                            |
    | Westmere     |                                                                                   | [Intel® Xeon® X5690]
    | Sandy Bridge | [Intel® Core™ i7-2600]<br>[Intel® Core™ i7-2760QM]                                | [Intel® Xeon® E5-2680]
    | Ivy Bridge   | [Intel® Core™ i7-3770]                                                            | [Intel® Xeon® E5-2680 v2]
@@ -35,6 +35,7 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
 
 [Intel® Core™2 T7400]: dumps/ia32/Intel(R)%20Core(TM)2%20T7400.md
 [Intel® Core™2 Duo P9500]: dumps/ia32/Intel(R)%20Core(TM)2%20Duo%20P9500.md
+[Intel® Core™2 Duo T9600]: dumps/ia32/Intel(R)%20Core(TM)2%20Duo%20T9600.md
 [Intel® Xeon® X5690]: dumps/ia32/Intel(R)%20Xeon(R)%20X5690.md
 [Intel® Core™ i7-2600]: dumps/ia32/Intel(R)%20Core(TM)%20i7-2600.md
 [Intel® Core™ i7-2760QM]: dumps/ia32/Intel(R)%20Core(TM)%20i7-2760QM.md
