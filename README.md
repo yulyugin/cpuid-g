@@ -25,7 +25,7 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
    | Merom        | [Intel® Core™2 T7400]                                                             |
    | Penryn       | [Intel® Core™2 Duo P9500]                                                         |
    | Westmere     |                                                                                   | [Intel® Xeon® X5690]
-   | Sandy Bridge | [Intel® Core™ i7-2600]                                                            | [Intel® Xeon® E5-2680]
+   | Sandy Bridge | [Intel® Core™ i7-2600]<br>[Intel® Core™ i7-2760QM]                                | [Intel® Xeon® E5-2680]
    | Ivy Bridge   | [Intel® Core™ i7-3770]                                                            | [Intel® Xeon® E5-2680 v2]
    | Haswell      | [Intel® Core™ i5-4200U]<br>[Intel® Xeon® E3-1241 v3]                              | [Intel® Xeon® E5-2680 v3]
    | Broadwell    | [Intel® Core™ i5-5300U]                                                           | [Intel® Xeon® E5-2680 v4]<br>[Intel® Xeon® E5-2699 v4]
@@ -37,6 +37,7 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
 [Intel® Core™2 Duo P9500]: dumps/ia32/Intel(R)%20Core(TM)2%20Duo%20P9500.md
 [Intel® Xeon® X5690]: dumps/ia32/Intel(R)%20Xeon(R)%20X5690.md
 [Intel® Core™ i7-2600]: dumps/ia32/Intel(R)%20Core(TM)%20i7-2600.md
+[Intel® Core™ i7-2760QM]: dumps/ia32/Intel(R)%20Core(TM)%20i7-2760QM.md
 [Intel® Xeon® E5-2680]: dumps/ia32/Intel(R)%20Xeon(R)%20E5-2680.md
 [Intel® Core™ i7-3770]: dumps/ia32/Intel(R)%20Core(TM)%20i7-3770.md
 [Intel® Xeon® E5-2680 v2]: dumps/ia32/Intel(R)%20Xeon(R)%20E5-2680%20v2.md
