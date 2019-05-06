@@ -23,31 +23,3 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-package com.yulyugin.cpuid_g;
-
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.TextView;
-
-public class MainActivity extends AppCompatActivity {
-    static {
-        System.loadLibrary("cpuid");
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        TextView cpuidView = findViewById(R.id.cpuidView);
-        printCPUID(cpuidView);
-    }
-
-    private void printCPUID(TextView cpuidView) {
-        String message = "";
-        message += "Leaf           Subleaf         EAX         EBX        ECX          EDX\n";
-        message += "----------------------------------------------------------------------\n";
-        cpuidView.setText(message);
-    }
-}
