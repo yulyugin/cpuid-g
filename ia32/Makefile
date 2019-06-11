@@ -1,5 +1,5 @@
-all: cpuid-g.c
-	gcc -Werror cpuid-g.c -o cpuid-g
+all: cmd/main.c
+	gcc -Werror $< -o cpuid-g
 
 clean:
 	rm cpuid-g
