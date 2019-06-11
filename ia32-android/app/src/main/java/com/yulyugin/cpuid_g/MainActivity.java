@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("cpuid");
     }
 
+    private native String dumpCPUID();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         String message = "";
         message += "Leaf           Subleaf         EAX         EBX        ECX          EDX\n";
         message += "----------------------------------------------------------------------\n";
+        message += dumpCPUID();
         cpuidView.setText(message);
     }
 }

@@ -23,3 +23,11 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#include <jni.h>
+#include <stdio.h>
+
+JNIEXPORT jstring JNICALL
+Java_com_yulyugin_cpuid_1g_MainActivity_dumpCPUID(JNIEnv *env, jobject instance) {
+    return (*env)->NewStringUTF(env, "");
+}
