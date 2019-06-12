@@ -21,6 +21,14 @@ android {
             path file('CMakeLists.txt')
         }
     }
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86'
+            universalApk false
+        }
+    }
 }
 
 dependencies {
