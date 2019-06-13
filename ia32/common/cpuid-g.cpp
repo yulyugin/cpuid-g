@@ -25,7 +25,6 @@
  */
 
 #include <stdint.h>
-#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -44,7 +43,8 @@ typedef struct cpuid_result_t {
     uint32_t edx;
 } cpuid_result;
 
-static cpuid_result do_cpuid(uint32_t leaf, uint32_t subleaf) {
+static cpuid_result
+do_cpuid(uint32_t leaf, uint32_t subleaf) {
     uint32_t eax, ebx, ecx, edx;
     __asm__ __volatile__ (
         "movl $0, %%ebx \n"
@@ -62,20 +62,8 @@ static cpuid_result do_cpuid(uint32_t leaf, uint32_t subleaf) {
     return r;
 }
 
-static void
-print_subleaf(uint32_t leaf, uint32_t subleaf, cpuid_result r) {
-    /* 10 bytes for string and one for \0. snprintf will automatically add it */
-    char _leaf[11], _eax[11], _ebx[11], _ecx[11], _edx[11];
-    snprintf(_leaf, 11, "0x%x", leaf);
-    snprintf(_eax, 11, "0x%x", r.eax);
-    snprintf(_ebx, 11, "0x%x", r.ebx);
-    snprintf(_ecx, 11, "0x%x", r.ecx);
-    snprintf(_edx, 11, "0x%x", r.edx);
-    printf("%10s  %10d  %10s  %10s  %10s  %10s\n",
-           _leaf, subleaf, _eax, _ebx, _ecx, _edx);
-}
-
-static int msb64(uint64_t v)
+static int
+msb64(uint64_t v)
 {
     int n = 0;
     int count = 32;
@@ -89,7 +77,8 @@ static int msb64(uint64_t v)
     return n;
 }
 
-void cpuid_leaf(uint32_t leaf) {
+string
+cpuid_leaf(uint32_t leaf) {
     uint32_t subleaf = 0;
     uint32_t max_subleaf = 0xffffffff - 1; /* -1 to avoid infinit loops */
 
@@ -100,6 +89,7 @@ void cpuid_leaf(uint32_t leaf) {
     cpuid_result last_subleaf;
     memset(&last_subleaf, 0, sizeof(last_subleaf));
 
+    string ret;
     for (subleaf = 0; subleaf <= max_subleaf; subleaf++) {
         cpuid_result r = do_cpuid(leaf, subleaf);
 
@@ -136,7 +126,7 @@ void cpuid_leaf(uint32_t leaf) {
                 // 0 in ECX[15:8], other input values with ECX >
                 // n also return 0 in ECX[15:8].
                 if ((r.eax || r.ebx || (r.ecx & ~0xff)) == 0)
-                    return;
+                    return ret;
                 break;
 
             case 0xd:
@@ -176,23 +166,22 @@ void cpuid_leaf(uint32_t leaf) {
         }
 
         if ((r.eax || r.ebx || r.ecx || r.edx) == 0)
-            return;
+            return ret;
 
         if (!memcmp(&last_subleaf, &r, sizeof(last_subleaf)))
-            return;
+            return ret;
 
-        print_subleaf(leaf, subleaf, r);
+        ret += cpuid_subleaf(leaf, subleaf);
         last_subleaf = r;
     }
+    return ret;
 }
 
-static void cpuid_level(uint32_t level) {
-    cpuid_result r = do_cpuid(level, 0);
-
-    int leaf;
-    for (leaf = level; leaf <= r.eax; ++leaf) {
-        cpuid_leaf(leaf);
-    }
+static inline string
+format_hex(uint32_t v) {
+    ostringstream ret;
+    ret << "0x" << hex << v;
+    return ret.str();
 }
 
 string
@@ -200,18 +189,28 @@ cpuid_subleaf(uint32_t leaf, uint32_t subleaf) {
     cpuid_result r = do_cpuid(leaf, subleaf);
 
     ostringstream ret;
-    ret << setw(10) << right << hex << showbase << leaf << "  ";
-    ret << setw(10) << right << dec << subleaf << "  ";;
-    ret << setw(10) << right << hex << showbase << r.eax << "  ";
-    ret << setw(10) << right << hex << showbase << r.ebx << "  ";
-    ret << setw(10) << right << hex << showbase << r.ecx << "  ";
-    ret << setw(10) << right << hex << showbase << r.edx << "\n";
+    ret << setw(10) << right << format_hex(leaf) << "  ";
+    ret << setw(10) << right << dec << subleaf << "  ";
+    ret << setw(10) << right << format_hex(r.eax) << "  ";
+    ret << setw(10) << right << format_hex(r.ebx) << "  ";
+    ret << setw(10) << right << format_hex(r.ecx) << "  ";
+    ret << setw(10) << right << format_hex(r.edx) << "\n";
 
     return ret.str();
 }
 
-void
+static string
+cpuid_level(uint32_t level) {
+    cpuid_result r = do_cpuid(level, 0);
+
+    string ret;
+    for (int leaf = level; leaf <= r.eax; ++leaf) {
+        ret += cpuid_leaf(leaf);
+    }
+    return ret;
+}
+
+string
 cpuid_all() {
-    cpuid_level(0);
-    cpuid_level(0x80000000);
+    return cpuid_level(0) + cpuid_level(0x80000000);
 }

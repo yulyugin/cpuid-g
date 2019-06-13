@@ -24,24 +24,24 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <string.h>
-#include <stdio.h>
 #include <stdint.h>
-#include <unistd.h>
 #include <getopt.h>
-#include <stdlib.h>
 
 #include <string>
+#include <iostream>
 
 #include "cpuid-g.h"
 
-static void print_help() {
-    printf("cpuid--g\n\n");
-    printf("USAGE: cpuid-g [options]\n\n");
-    printf("Options:\n");
-    printf("\t-h, --help\tPrint usage and exit.\n");
-    printf("\t-l, --leaf\tPrint just this leaf\n");
-    printf("\t-s, --subleaf\tUse this particular subleaf\n");
+using namespace std;
+
+static void
+print_help() {
+    cout << "cpuid--g\n\n";
+    cout << "USAGE: cpuid-g [options]\n\n";
+    cout << "Options:\n";
+    cout << "\t-h, --help\tPrint usage and exit.\n";
+    cout << "\t-l, --leaf\tPrint just this leaf\n";
+    cout << "\t-s, --subleaf\tUse this particular subleaf\n";
 }
 
 int main(int argc, char **argv) {
@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
                 subleaf = strtol(optarg, NULL, 16);
                 break;
             case '?':
-                printf("Use -h, --help options to get usage.\n");
+                cout << "Use -h, --help options to get usage.\n";
                 return 0;
             case 'h':
             default:
@@ -74,18 +74,17 @@ int main(int argc, char **argv) {
         }
     }
 
-    printf("Leaf           Subleaf         EAX         EBX        ECX          EDX\n");
-    printf("----------------------------------------------------------------------\n");
+    cout << "Leaf           Subleaf         EAX         EBX        ECX          EDX\n";
+    cout << "----------------------------------------------------------------------\n";
 
     if (leaf != 0xffffffff) {
         if (subleaf != 0xffffffff) {
-            std::string s = cpuid_subleaf(leaf, subleaf);
-            printf("%s", s.c_str());
+            cout << cpuid_subleaf(leaf, subleaf);
         } else {
-            cpuid_leaf(leaf);
+            cout << cpuid_leaf(leaf);
         }
     } else {
-        cpuid_all();
+        cout << cpuid_all();
     }
 
     return 0;

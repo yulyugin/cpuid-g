@@ -1,6 +1,6 @@
 /* Print CPUID the right way
  *
- * Copyright (c) 2014, Evgeny Yulyugin and contributors.
+ * Copyright (c) 2019, Evgeny Yulyugin and contributors.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -24,11 +24,12 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __COMMON_CPUID_G_H__
-#define __COMMON_CPUID_G_H__
+#ifndef __ANDROID_CPUID_H__
+#define __ANDROID_CPUID_H__
 
-std::string cpuid_subleaf(uint32_t leaf, uint32_t subleaf);
-std::string cpuid_leaf(uint32_t leaf);
-std::string cpuid_all();
+#include <jni.h>
 
-#endif  // __COMMON_CPUID_G_H__
+extern "C" JNIEXPORT jstring JNICALL
+Java_com_yulyugin_cpuid_1g_MainActivity_dumpCPUID(JNIEnv *env, jobject instance);
+
+#endif // __ANDROID_CPUID_H__
