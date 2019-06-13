@@ -77,7 +77,9 @@ int main(int argc, char **argv) {
 
     if (leaf != 0xffffffff) {
         if (subleaf != 0xffffffff) {
-            cpuid_subleaf(leaf, subleaf);
+            char *s = cpuid_subleaf(leaf, subleaf);
+            printf("%s", s);
+            free(s);
         } else {
             cpuid_leaf(leaf);
         }

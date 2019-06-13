@@ -27,7 +27,7 @@
 #ifndef __COMMON_CPUID_G_H__
 #define __COMMON_CPUID_G_H__
 
-void cpuid_subleaf(uint32_t leaf, uint32_t subleaf);
+char *cpuid_subleaf(uint32_t leaf, uint32_t subleaf);
 void cpuid_leaf(uint32_t leaf);
 void cpuid_all();
 
