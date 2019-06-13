@@ -1,8 +1,5 @@
-cpuid-g: cmd/main.c common/cpuid-g.o
-	gcc -Werror $^ -o cpuid-g -Icommon
-
-common/cpuid-g.o: common/cpuid-g.c
-	gcc -Werror -c $< -o $@
+cpuid-g: cmd/main.cpp common/cpuid-g.cpp
+	g++ -Werror $^ -o cpuid-g -Icommon
 
 clean:
 	rm cpuid-g

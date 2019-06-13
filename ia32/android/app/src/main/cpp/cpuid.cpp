@@ -25,14 +25,11 @@
  */
 
 #include <jni.h>
-#include <stdlib.h>
-
+#include <string>
 #include "cpuid-g.h"
 
 JNIEXPORT jstring JNICALL
 Java_com_yulyugin_cpuid_1g_MainActivity_dumpCPUID(JNIEnv *env, jobject instance) {
-    char *subleaf = cpuid_subleaf(0, 0);
-    jstring ret = (*env)->NewStringUTF(env, subleaf);
-    free(subleaf);
-    return ret;
+    std::string subleaf = cpuid_subleaf(0, 0);
+    return env->NewStringUTF(subleaf.c_str());
 }

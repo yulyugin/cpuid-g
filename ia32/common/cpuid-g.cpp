@@ -29,10 +29,13 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "cpuid-g.h"
+#include <string>
+#include <sstream>
+#include <iomanip>
 
-static char *header =
-    "Leaf           Subleaf         EAX         EBX        ECX          EDX\n";
+using namespace std;
+
+#include "cpuid-g.h"
 
 typedef struct cpuid_result_t {
     uint32_t eax;
@@ -192,23 +195,19 @@ static void cpuid_level(uint32_t level) {
     }
 }
 
-char *
+string
 cpuid_subleaf(uint32_t leaf, uint32_t subleaf) {
     cpuid_result r = do_cpuid(leaf, subleaf);
 
-    /* 10 bytes for string and one for \0. snprintf will automatically add it */
-    char _leaf[11], _eax[11], _ebx[11], _ecx[11], _edx[11];
-    snprintf(_leaf, 11, "0x%x", leaf);
-    snprintf(_eax, 11, "0x%x", r.eax);
-    snprintf(_ebx, 11, "0x%x", r.ebx);
-    snprintf(_ecx, 11, "0x%x", r.ecx);
-    snprintf(_edx, 11, "0x%x", r.edx);
+    ostringstream ret;
+    ret << setw(10) << right << hex << showbase << leaf << "  ";
+    ret << setw(10) << right << dec << subleaf << "  ";;
+    ret << setw(10) << right << hex << showbase << r.eax << "  ";
+    ret << setw(10) << right << hex << showbase << r.ebx << "  ";
+    ret << setw(10) << right << hex << showbase << r.ecx << "  ";
+    ret << setw(10) << right << hex << showbase << r.edx << "\n";
 
-    size_t length = strlen(header) + 1;  // +1 for '\0'
-    char *ret = (char *)malloc(sizeof(char) * length);
-    snprintf(ret, length, "%10s  %10d  %10s  %10s  %10s  %10s\n",
-             _leaf, subleaf, _eax, _ebx, _ecx, _edx);
-    return ret;
+    return ret.str();
 }
 
 void

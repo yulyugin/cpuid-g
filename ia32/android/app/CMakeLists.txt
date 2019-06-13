@@ -4,5 +4,5 @@ include_directories(../../common)
 
 add_library(cpuid
             SHARED
-            src/main/cpp/cpuid.c
-            ../../common/cpuid-g.c)
+            src/main/cpp/cpuid.cpp
+            ../../common/cpuid-g.cpp)

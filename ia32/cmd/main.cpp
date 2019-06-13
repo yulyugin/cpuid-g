@@ -31,6 +31,8 @@
 #include <getopt.h>
 #include <stdlib.h>
 
+#include <string>
+
 #include "cpuid-g.h"
 
 static void print_help() {
@@ -77,9 +79,8 @@ int main(int argc, char **argv) {
 
     if (leaf != 0xffffffff) {
         if (subleaf != 0xffffffff) {
-            char *s = cpuid_subleaf(leaf, subleaf);
-            printf("%s", s);
-            free(s);
+            std::string s = cpuid_subleaf(leaf, subleaf);
+            printf("%s", s.c_str());
         } else {
             cpuid_leaf(leaf);
         }
