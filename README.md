@@ -29,7 +29,7 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
    | Ivy Bridge   | [Intel® Core™ i7-3770]                                                            | [Intel® Xeon® E5-2680 v2]
    | Haswell      | [Intel® Core™ i5-4200U]<br>[Intel® Xeon® E3-1241 v3]                              | [Intel® Xeon® E5-2680 v3]
    | Broadwell    | [Intel® Core™ i5-5300U]                                                           | [Intel® Xeon® E5-2680 v4]<br>[Intel® Xeon® E5-2699 v4]
-   | Skylake      | [Intel® Core™ i7-6700K]                                                           | [Intel® Xeon® Gold 6140]
+   | Skylake      | [Intel® Core™ i7-6700K]<br>[Intel® Core™ i9-7900X]                                | [Intel® Xeon® Gold 6140]
    | Kaby Lake    | [Intel® Core™ i7-7700U]<br>[Intel® Core™ i7-7700K]</br>[Intel® Xeon® E3-1505M v6] |
    | Coffee Lake  | [Intel® Core™ i7-8559U]<br>[Intel® Core™ i7-8700K]                                |
 
@@ -55,6 +55,7 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
 [Intel® Xeon® E3-1505M v6]: dumps/ia32/Intel(R)%20Xeon(R)%20E3-1505M%20v6.md
 [Intel® Core™ i7-8559U]: dumps/ia32/Intel(R)%20Core(TM)%20i7-8559U.md
 [Intel® Core™ i7-8700K]: dumps/ia32/Intel(R)%20Core(TM)%20i7-8700K.md
+[Intel® Core™ i9-7900X]: dumps/ia32/Intel(R)%20Core(TM)%20i9-7900X.md
 
 4. [AMD Ryzen™ Threadripper™ 1950X](dumps/ia32/AMD%20Ryzen%20Threadripper%201950X.md)
 
