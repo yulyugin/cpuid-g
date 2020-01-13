@@ -134,9 +134,11 @@ cpuid_leaf(uint32_t leaf) {
                 // if it corresponds to a supported bit in either the
                 // XCR0 register or the IA32_XSS MSR.
                 if (subleaf == 0) {
+                    // XCR0 mask
                     subleaf_mask |= (uint64_t)r.edx << 32 | r.eax;
                 } else if (subleaf == 1) {
-                    subleaf_mask |= (uint64_t)r.edx << 32 | r.eax;
+                    // IA32_XSS mask
+                    subleaf_mask |= (uint64_t)r.edx << 32 | r.ecx;
                     max_subleaf = msb64(subleaf_mask);
                 } else if (!(subleaf_mask & (1 << subleaf))) {
                     /* invalid subleaf */
