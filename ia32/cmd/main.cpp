@@ -26,6 +26,7 @@
 
 #include <stdint.h>
 #include <getopt.h>
+#include <stdlib.h>
 
 #include <string>
 #include <iostream>
