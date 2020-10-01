@@ -32,6 +32,7 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
    | Skylake      | [Intel® Core™ i7-6700K]<br>[Intel® Core™ i9-7900X]                                | [Intel® Xeon® Gold 6140]
    | Kaby Lake    | [Intel® Core™ i7-7700U]<br>[Intel® Core™ i7-7700K]</br>[Intel® Xeon® E3-1505M v6] |
    | Coffee Lake  | [Intel® Core™ i7-8559U]<br>[Intel® Core™ i7-8700K]</br>[Intel® Core™ i7-9700K]    |
+   | Cascade Lake |                                                                                   | [Intel® Xeon® Gold 6252N]
 
 [Intel® Core™2 T7400]: dumps/ia32/Intel(R)%20Core(TM)2%20T7400.md
 [Intel® Core™2 Duo P9500]: dumps/ia32/Intel(R)%20Core(TM)2%20Duo%20P9500.md
@@ -57,6 +58,7 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
 [Intel® Core™ i7-8700K]: dumps/ia32/Intel(R)%20Core(TM)%20i7-8700K.md
 [Intel® Core™ i9-7900X]: dumps/ia32/Intel(R)%20Core(TM)%20i9-7900X.md
 [Intel® Core™ i7-9700K]: dumps/ia32/Intel(R)%20Core(TM)%20i7-9700K.md
+[Intel® Xeon® Gold 6252N]: dumps/ia32/Intel(R)%20Xeon(R)%20Gold%206252N.md
 
 4. [AMD Ryzen™ Threadripper™ 1950X](dumps/ia32/AMD%20Ryzen%20Threadripper%201950X.md)
 
