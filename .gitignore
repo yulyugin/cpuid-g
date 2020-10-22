@@ -8,3 +8,4 @@ cpuid-g
 *.ko
 *.order
 .tmp_versions
+*.exe
