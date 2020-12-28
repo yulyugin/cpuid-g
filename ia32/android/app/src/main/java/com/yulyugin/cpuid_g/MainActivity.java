@@ -26,6 +26,11 @@
 
 package com.yulyugin.cpuid_g;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.ParcelFileDescriptor;
+import android.provider.DocumentsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -33,7 +38,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
+    private static final int CREATE_FILE_CODE = 1;
+
     static {
         System.loadLibrary("cpuid");
     }
@@ -60,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.save_file:
+                saveFilePicker();
+                return true;
             case R.id.send_mail:
                 return true;
             default:
@@ -67,11 +80,53 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode,
+                                 Intent resultData) {
+        if (requestCode == CREATE_FILE_CODE
+                && resultCode == Activity.RESULT_OK) {
+            // The result data contains a URI for the document or directory that
+            // the user selected.
+            Uri uri = null;
+            if (resultData != null) {
+                uri = resultData.getData();
+                saveCPUID(uri);
+            }
+        }
+    }
+
+    private void saveFilePicker() {
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TITLE, "cpuid.txt");
+
+        startActivityForResult(intent, CREATE_FILE_CODE);
+    }
+
+    private void saveCPUID(Uri uri) {
+        try {
+            ParcelFileDescriptor pfd = getContentResolver().openFileDescriptor(uri, "w");
+            FileOutputStream fileOutputStream =
+                    new FileOutputStream(pfd.getFileDescriptor());
+            fileOutputStream.write(getCPUID().getBytes());
+            fileOutputStream.close();
+            pfd.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String getCPUID() {
+        return ""
+                + "Leaf           Subleaf         EAX         EBX        ECX          EDX\n"
+                + "----------------------------------------------------------------------\n"
+                + dumpCPUID();
+    }
+
     private void printCPUID(TextView cpuidView) {
-        String message = "";
-        message += "Leaf           Subleaf         EAX         EBX        ECX          EDX\n";
-        message += "----------------------------------------------------------------------\n";
-        message += dumpCPUID();
-        cpuidView.setText(message);
+        cpuidView.setText(getCPUID());
     }
 }
