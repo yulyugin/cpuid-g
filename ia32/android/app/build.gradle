@@ -24,7 +24,7 @@ android {
         abi {
             enable true
             reset()
-            include 'x86'
+            include 'x86', 'x86_64'
             universalApk false
         }
     }
