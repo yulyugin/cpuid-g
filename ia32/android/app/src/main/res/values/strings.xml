@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CPUID-G</string>
+    <string name="send_mail">Send to mail</string>
+    <string name="save_file">Save to file</string>
 </resources>

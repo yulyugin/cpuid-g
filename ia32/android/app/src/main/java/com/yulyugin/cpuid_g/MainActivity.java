@@ -28,6 +28,9 @@ package com.yulyugin.cpuid_g;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,6 +47,24 @@ public class MainActivity extends AppCompatActivity {
 
         TextView cpuidView = findViewById(R.id.cpuidView);
         printCPUID(cpuidView);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.file_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.save_file:
+            case R.id.send_mail:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void printCPUID(TextView cpuidView) {
