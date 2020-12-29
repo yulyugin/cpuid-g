@@ -27,10 +27,10 @@
 package com.yulyugin.cpuid_g;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
-import android.provider.DocumentsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 saveFilePicker();
                 return true;
             case R.id.send_mail:
+                sendMail();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -115,6 +116,19 @@ public class MainActivity extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendMail () {
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL, "");
+        i.putExtra(Intent.EXTRA_SUBJECT, "CPUID-G dump");
+        i.putExtra(Intent.EXTRA_TEXT, getCPUID());
+        try {
+            startActivity(Intent.createChooser(i, "Send CPUID-G dump"));
+        } catch (ActivityNotFoundException e) {
             e.printStackTrace();
         }
     }
