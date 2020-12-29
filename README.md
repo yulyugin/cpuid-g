@@ -17,8 +17,9 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
 ### Intel® 64 and IA-32 CPUs
 
 1. [Intel® Quark™ SoC X1000](dumps/ia32/Intel(R)%20Quark(TM)%20SoC%20X1000.md)
-2. [Intel® Xeon Phi™ 7290](dumps/ia32/Intel(R)%20Xeon%20Phi(TM)%207290.md) (formerly Knigts Landing)
-3. Intel® Core™ and Xeon® CPUs:
+2. [Intel® Atom™ Z2560](dumps/ia32/Intel(R)%20Atom(TM)%20Z2560.md) (formerly Saltwell)
+3. [Intel® Xeon Phi™ 7290](dumps/ia32/Intel(R)%20Xeon%20Phi(TM)%207290.md) (formerly Knigts Landing)
+4. Intel® Core™ and Xeon® CPUs:
 
    | Codename     | Client variant                                                                    | Server variant
    | ---          | ---                                                                               | ---
@@ -61,7 +62,7 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
 [Intel® Core™ i7-9700K]: dumps/ia32/Intel(R)%20Core(TM)%20i7-9700K.md
 [Intel® Xeon® Gold 6252N]: dumps/ia32/Intel(R)%20Xeon(R)%20Gold%206252N.md
 
-4. [AMD Ryzen™ Threadripper™ 1950X](dumps/ia32/AMD%20Ryzen%20Threadripper%201950X.md)
+5. [AMD Ryzen™ Threadripper™ 1950X](dumps/ia32/AMD%20Ryzen%20Threadripper%201950X.md)
 
 ### Intel® IA-64 a.k.a. Intel® Itanium® CPUs
 
