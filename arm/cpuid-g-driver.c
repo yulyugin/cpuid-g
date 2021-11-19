@@ -31,6 +31,9 @@
 #include <linux/miscdevice.h>
 #include <asm/uaccess.h>
 
+#include "cpuid-g.h"
+#include "asm-inline.h"
+
 MODULE_LICENSE("BSD 2-Clause");
 MODULE_AUTHOR("Evgeny Yulyugin <yulyugin@gmail.com>");
 MODULE_DESCRIPTION("cpuid-g");
@@ -54,12 +57,35 @@ static struct miscdevice cpuid_g_dev = {
     &fops
 };
 
+arm32_cpuid_t arm32_cpuid;
+
 static int __init
 cpuid_g_init(void)
 {
     int ret = misc_register(&cpuid_g_dev);
     if (ret)
         printk(KERN_ERR "Unable to register cpuid-g device\n");
+
+    arm32_cpuid.midr = CR0_REG(0);
+    arm32_cpuid.ctr = CR0_REG(1);
+    arm32_cpuid.tcmtr = CR0_REG(2);
+    arm32_cpuid.tlbtr = CR0_REG(3);
+
+    arm32_cpuid.id_pfr0 = CR1_REG(0);
+    arm32_cpuid.id_pfr1 = CR1_REG(1);
+    arm32_cpuid.id_dfr0 = CR1_REG(2);
+    arm32_cpuid.id_afr0 = CR1_REG(3);
+    arm32_cpuid.id_mmfr0 = CR1_REG(4);
+    arm32_cpuid.id_mmfr1 = CR1_REG(5);
+    arm32_cpuid.id_mmfr2 = CR1_REG(6);
+    arm32_cpuid.id_mmfr3 = CR1_REG(7);
+
+    arm32_cpuid.id_isar0 = CR2_REG(0);
+    arm32_cpuid.id_isar1 = CR2_REG(1);
+    arm32_cpuid.id_isar2 = CR2_REG(2);
+    arm32_cpuid.id_isar3 = CR2_REG(3);
+    arm32_cpuid.id_isar4 = CR2_REG(4);
+    arm32_cpuid.id_isar5 = CR2_REG(5);
 
     return ret;
 }
