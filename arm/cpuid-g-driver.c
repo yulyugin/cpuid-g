@@ -114,158 +114,17 @@ cpuid_g_release(struct inode *inode, struct file *file)
     return 0;
 }
 
-static int
-put_word(uint32_t cpuid_val, char *buffer)
-{
-    int count = 4;
-    while (count--) {
-        if (put_user(cpuid_val >> ((3 - count) * 8), buffer))
-          return -EFAULT;
-        buffer++;
-    }
-    return 0;
-}
-
 static ssize_t
 cpuid_g_read(struct file *filp, char *buffer, size_t length, loff_t *offset)
 {
-    int count = 0;
-    uint32_t id = 0;
+    int not_copied = 0;
 
     if (length < 0)
         return 0;
 
-    count = length / 4;
+    if (length > sizeof arm32_cpuid)
+        length = sizeof arm32_cpuid;
 
-    switch (count) {
-    default:
-    case 18:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c2, 5"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 17 * 4))
-            return -EFAULT;
-    case 17:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c2, 4"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 16 * 4))
-            return -EFAULT;
-    case 16:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c2, 3"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 15 * 4))
-            return -EFAULT;
-    case 15:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c2, 2"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 14 * 4))
-            return -EFAULT;
-    case 14:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c2, 1"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 13 * 4))
-            return -EFAULT;
-    case 13:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c2, 0"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 12 * 4))
-            return -EFAULT;
-    case 12:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c1, 7"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 11 * 4))
-            return -EFAULT;
-    case 11:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c1, 6"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 10 * 4))
-            return -EFAULT;
-    case 10:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c1, 5"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 9 * 4))
-            return -EFAULT;
-    case 9:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c1, 4"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 8 * 4))
-            return -EFAULT;
-    case 8:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c1, 3"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 7 * 4))
-            return -EFAULT;
-    case 7:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c1, 2"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 6 * 4))
-            return -EFAULT;
-    case 6:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c1, 1"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 5 * 4))
-            return -EFAULT;
-    case 5:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c1, 0"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 4 * 4))
-            return -EFAULT;
-    case 4:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c0, 3"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 3 * 4))
-            return -EFAULT;
-    case 3:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c0, 2"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 2 * 4))
-            return -EFAULT;
-    case 2:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c0, 1"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer + 4))
-            return -EFAULT;
-    case 1:
-        __asm__ __volatile__ (
-            "mrc p15, 0, %0, c0, c0, 0"
-            : "=r" (id)
-          );
-        if (put_word(id, buffer))
-            return -EFAULT;
-    case 0:
-        return count * 4;
-    }
+    not_copied = copy_to_user(buffer, &arm32_cpuid, length);
+    return length - not_copied;
 }
