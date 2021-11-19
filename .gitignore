@@ -5,6 +5,7 @@ cpuid-g
 *.o
 *.d
 *.mod.c
+*.mod
 *.ko
 *.order
 .tmp_versions
