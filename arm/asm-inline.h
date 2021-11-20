@@ -27,18 +27,21 @@
 #ifndef ARM_ASM_INLINE_H
 #define ARM_ASM_INLINE_H
 
-#define MRC_CRM_OP2(crm, op2)                   \
-({                                              \
-    uint32_t r;                                 \
-    __asm__ __volatile__ (                      \
-        "mrc p15, 0, %0, c0, c" #crm ", " #op2 \
-        : "=r" (r)                              \
-        );                                      \
-    r;                                          \
+#define MRC_OP1_CRM_OP2(op1, crm, op2)                \
+({                                                    \
+    uint32_t r;                                       \
+    __asm__ __volatile__ (                            \
+        "mrc p15, " #op1 ", %0, c0, c" #crm ", " #op2 \
+        : "=r" (r)                                    \
+        );                                            \
+    r;                                                \
 })
 
-#define CR0_REG(op2) MRC_CRM_OP2(0, op2)
-#define CR1_REG(op2) MRC_CRM_OP2(1, op2)
-#define CR2_REG(op2) MRC_CRM_OP2(2, op2)
+#define CR0_REG(op2) MRC_OP1_CRM_OP2(0, 0, op2)
+#define CR1_REG(op2) MRC_OP1_CRM_OP2(0, 1, op2)
+#define CR2_REG(op2) MRC_OP1_CRM_OP2(0, 2, op2)
+
+#define MRC_1_0(op2) MRC_OP1_CRM_OP2(1, 0, op2)
+#define MRC_2_0(op2) MRC_OP1_CRM_OP2(2, 0, op2)
 
 #endif  /* ARM_ASM_INLINE_H */

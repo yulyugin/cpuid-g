@@ -27,14 +27,19 @@
 #ifndef ARM_CPUID_G_H
 #define ARM_CPUID_G_H
 
+#define ARM_CPU_PART_MASK           0xff00fff0
+
+#define ARM_CPU_PART_ARM1176        0x4100b760
+#define ARM_CPU_PART_ARM_CORTEX_A53 0x4100d030
+
 typedef struct arm32_cpuid {
-    /* C0 registers */
     uint32_t midr;
     uint32_t ctr;
     uint32_t tcmtr;
     uint32_t tlbtr;
+    uint32_t mpidr;
+    uint32_t revidr;
 
-    /* C1 registers */
     uint32_t id_pfr0;
     uint32_t id_pfr1;
     uint32_t id_dfr0;
@@ -44,13 +49,18 @@ typedef struct arm32_cpuid {
     uint32_t id_mmfr2;
     uint32_t id_mmfr3;
 
-    /* C2 registers */
     uint32_t id_isar0;
     uint32_t id_isar1;
     uint32_t id_isar2;
     uint32_t id_isar3;
     uint32_t id_isar4;
     uint32_t id_isar5;
+
+    uint32_t ccsidr;
+    uint32_t clidr;
+    uint32_t aidr;
+
+    uint32_t csselr;
 } arm32_cpuid_t;
 
 #endif  /* ARM_CPUID_G_H */

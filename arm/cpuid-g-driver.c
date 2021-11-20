@@ -62,6 +62,7 @@ arm32_cpuid_t arm32_cpuid;
 static int __init
 cpuid_g_init(void)
 {
+    uint32_t part_number;
     int ret = misc_register(&cpuid_g_dev);
     if (ret)
         printk(KERN_ERR "Unable to register cpuid-g device\n");
@@ -70,6 +71,12 @@ cpuid_g_init(void)
     arm32_cpuid.ctr = CR0_REG(1);
     arm32_cpuid.tcmtr = CR0_REG(2);
     arm32_cpuid.tlbtr = CR0_REG(3);
+
+    part_number = arm32_cpuid.midr & ARM_CPU_PART_MASK;
+    if (part_number == ARM_CPU_PART_ARM_CORTEX_A53) {
+        arm32_cpuid.mpidr = CR0_REG(5);
+        arm32_cpuid.revidr = CR0_REG(6);
+    }
 
     arm32_cpuid.id_pfr0 = CR1_REG(0);
     arm32_cpuid.id_pfr1 = CR1_REG(1);
@@ -86,6 +93,14 @@ cpuid_g_init(void)
     arm32_cpuid.id_isar3 = CR2_REG(3);
     arm32_cpuid.id_isar4 = CR2_REG(4);
     arm32_cpuid.id_isar5 = CR2_REG(5);
+
+    if (part_number == ARM_CPU_PART_ARM_CORTEX_A53) {
+        arm32_cpuid.ccsidr = MRC_1_0(0);
+        arm32_cpuid.clidr = MRC_1_0(1);
+        arm32_cpuid.aidr = MRC_1_0(7);
+
+        arm32_cpuid.csselr = MRC_2_0(0);
+    }
 
     return ret;
 }
