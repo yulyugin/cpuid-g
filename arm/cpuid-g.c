@@ -32,27 +32,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-const int cpuids_num = 18;
-
-const char *registers[] = {"Main ID Register",
-                           "Cache Type Register",
-                           "TCM Status Register",
-                           "TLB Type Register",
-                           "Processor Feature Register 0",
-                           "Processor Feature Register 1",
-                           "Debug Feature Register 0",
-                           "Auxiliary Feature Register 0",
-                           "Memory Model Feature Register 0",
-                           "Memory Model Feature Register 1",
-                           "Memory Model Feature Register 2",
-                           "Memory Model Feature Register 3",
-                           "Instruction Set Attributes Register 0",
-                           "Instruction Set Attributes Register 1",
-                           "Instruction Set Attributes Register 2",
-                           "Instruction Set Attributes Register 3",
-                           "Instruction Set Attributes Register 4",
-                           "Instruction Set Attributes Register 5"
-                           };
+#include "cpuid-g.h"
 
 // Vendor definition
 #define ARM     'A'  // 0x41
@@ -60,14 +40,25 @@ const char *registers[] = {"Main ID Register",
 #define TI      'T'  // 0x54
 #define INTEL   'i'  // 0x69
 
-static uint32_t *get_cpuid() {
+#define PRINT_CPUID_REG(name_string, name) \
+    printf("%-40s %#10x\n", name_string, c->name);
+
+static arm32_cpuid_t *
+get_cpuid()
+{
     int fd = open("/dev/cpuid-g", O_RDONLY);
     if (fd < 0) {
         perror("open");
         return NULL;
     }
-    uint32_t *id = (uint32_t *)calloc(cpuids_num, sizeof(uint32_t));
-    if (read(fd, id, cpuids_num * 4) < 0) {
+
+    arm32_cpuid_t *id = (arm32_cpuid_t *)calloc(1, sizeof *id);
+    if (!id) {
+        perror("calloc");
+        return NULL;
+    }
+
+    if (read(fd, id, sizeof *id) < 0) {
         perror("read");
         return NULL;
     }
@@ -78,14 +69,14 @@ static uint32_t *get_cpuid() {
     return id;
 }
 
-int main(int argc, char **argv) {
-    uint32_t *c = get_cpuid();
+int
+main(int argc, char **argv)
+{
+    arm32_cpuid_t *c = get_cpuid();
     if (!c)
         return 1;
 
-    uint32_t implementer = c[0] >> 24;
-    int i = 0;
-
+    uint32_t implementer = c->midr >> 24;
     if (implementer == ARM)
         printf("Vendor: ARM\n");
     else if (implementer == DEC)
@@ -95,8 +86,26 @@ int main(int argc, char **argv) {
     else if (implementer == INTEL)
         printf("Vendor: Intel\n");
 
-    for (i = 0; i < cpuids_num; ++i)
-        printf("%-40s %#10x\n", registers[i], c[i]);
+    uint32_t part_number = (c->midr & 0xfff0) >> 4;
+
+    PRINT_CPUID_REG("Main ID Register", midr);
+    PRINT_CPUID_REG("Cache Type Register", ctr);
+    PRINT_CPUID_REG("TCM Type Register", tcmtr);
+    PRINT_CPUID_REG("TLB Type Register", tlbtr);
+    PRINT_CPUID_REG("Processor Feature Register 0", id_pfr0);
+    PRINT_CPUID_REG("Processor Feature Register 1", id_pfr1);
+    PRINT_CPUID_REG("Debug Feature Register 0", id_dfr0);
+    PRINT_CPUID_REG("Auxiliary Feature Register 0", id_afr0);
+    PRINT_CPUID_REG("Memory Model Feature Register 0", id_mmfr0);
+    PRINT_CPUID_REG("Memory Model Feature Register 1", id_mmfr1);
+    PRINT_CPUID_REG("Memory Model Feature Register 2", id_mmfr2);
+    PRINT_CPUID_REG("Memory Model Feature Register 3", id_mmfr3);
+    PRINT_CPUID_REG("Instruction Set Attributes Register 0", id_isar0);
+    PRINT_CPUID_REG("Instruction Set Attributes Register 1", id_isar1);
+    PRINT_CPUID_REG("Instruction Set Attributes Register 2", id_isar2);
+    PRINT_CPUID_REG("Instruction Set Attributes Register 3", id_isar3);
+    PRINT_CPUID_REG("Instruction Set Attributes Register 4", id_isar4);
+    PRINT_CPUID_REG("Instruction Set Attributes Register 5", id_isar5);
 
     free(c);
     return 0;
