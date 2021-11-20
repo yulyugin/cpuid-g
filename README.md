@@ -70,4 +70,9 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
 
 ### ARM® CPUs
 
-1. [ARM1176JZFS](dumps/arm/ARM1176JZFS.md)
+1. Aarch32:
+
+   | Architecture   | Chip
+   | ---            | ---
+   | ARM1176JZFS    | [BCM2835](dumps/arm/BCM2835.md)
+   | ARM Cortex A53 | [BCM2837](dumps/arm/BCM2837.md)
