@@ -108,12 +108,12 @@ print_arm32_cpuid(void)
     PRINT_CPUID_REG32("Memory Model Feature 2", id_mmfr2);
     PRINT_CPUID_REG32("Memory Model Feature 3", id_mmfr3);
 
-    PRINT_CPUID_REG32("Instruction Set Attributes 0", id_isar0);
-    PRINT_CPUID_REG32("Instruction Set Attributes 1", id_isar1);
-    PRINT_CPUID_REG32("Instruction Set Attributes 2", id_isar2);
-    PRINT_CPUID_REG32("Instruction Set Attributes 3", id_isar3);
-    PRINT_CPUID_REG32("Instruction Set Attributes 4", id_isar4);
-    PRINT_CPUID_REG32("Instruction Set Attributes 5", id_isar5);
+    PRINT_CPUID_REG32("Instruction Set Attribute 0", id_isar0);
+    PRINT_CPUID_REG32("Instruction Set Attribute 1", id_isar1);
+    PRINT_CPUID_REG32("Instruction Set Attribute 2", id_isar2);
+    PRINT_CPUID_REG32("Instruction Set Attribute 3", id_isar3);
+    PRINT_CPUID_REG32("Instruction Set Attribute 4", id_isar4);
+    PRINT_CPUID_REG32("Instruction Set Attribute 5", id_isar5);
 
     if (part_number == ARM_CPU_PART_ARM_CORTEX_A53) {
         PRINT_CPUID_REG32("Cache Size ID", ccsidr);
