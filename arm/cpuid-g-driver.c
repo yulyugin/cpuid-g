@@ -91,7 +91,16 @@ cpuid_g_release(struct inode *inode, struct file *file)
     return 0;
 }
 
-#ifndef CONFIG_ARM64
+#ifdef CONFIG_ARM64
+arm64_cpuid_t arm64_cpuid;
+
+static void
+read_arm64_cpuid(void)
+{
+}
+
+#else
+
 arm32_cpuid_t arm32_cpuid;
 
 static void
@@ -141,7 +150,11 @@ cpuid_g_read(struct file *filp, char *buffer, size_t length, loff_t *offset)
 {
     int not_copied = 0;
 
-#ifndef CONFIG_ARM64
+#ifdef CONFIG_ARM64
+    void *cpuid = (void *)&arm64_cpuid;
+    unsigned long size = sizeof arm64_cpuid;
+    read_arm64_cpuid();
+#else
     void *cpuid = (void *)&arm32_cpuid;
     unsigned long size = sizeof arm32_cpuid;
     read_arm32_cpuid();
