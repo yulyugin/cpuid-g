@@ -66,6 +66,20 @@ get_cpuid(void *id, size_t size)
     return 0;
 }
 
+static void
+print_vendor(uint32_t midr)
+{
+    uint32_t implementer = midr >> 24;
+    if (implementer == ARM)
+        printf("Vendor: ARM\n");
+    else if (implementer == DEC)
+        printf("Vendor: DEC\n");
+    else if (implementer == TI)
+        printf("Vendor: Texas Instruments\n");
+    else if (implementer == INTEL)
+        printf("Vendor: Intel\n");
+}
+
 static int
 print_arm32_cpuid(void)
 {
@@ -78,15 +92,7 @@ print_arm32_cpuid(void)
     if (get_cpuid(c, sizeof *c) < 0)
         return 1;
 
-    uint32_t implementer = c->midr >> 24;
-    if (implementer == ARM)
-        printf("Vendor: ARM\n");
-    else if (implementer == DEC)
-        printf("Vendor: DEC\n");
-    else if (implementer == TI)
-        printf("Vendor: Texas Instruments\n");
-    else if (implementer == INTEL)
-        printf("Vendor: Intel\n");
+    print_vendor(c->midr);
 
     uint32_t part_number = c->midr & ARM_CPU_PART_MASK;
 
@@ -137,6 +143,8 @@ print_arm64_cpuid()
 
     if (get_cpuid(c, sizeof *c) < 0)
         return 1;
+
+    print_vendor(c->midr);
 
     PRINT_CPUID_REG32("Main ID", midr);
     PRINT_CPUID_REG64("Multiprocessor Affinity", mpidr);
