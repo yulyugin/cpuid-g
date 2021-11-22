@@ -123,8 +123,17 @@ print_arm32_cpuid(void)
     free(c);
 }
 
+static int
+print_arm64_cpuid()
+{
+    return 0;
+}
+
 int
 main(int argc, char **argv)
 {
-    return print_arm32_cpuid();
+    if (sizeof(void *) == 8)
+        return print_arm64_cpuid();
+    else
+        return print_arm32_cpuid();
 }
