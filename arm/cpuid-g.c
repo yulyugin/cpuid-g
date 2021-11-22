@@ -90,37 +90,37 @@ print_arm32_cpuid(void)
 
     uint32_t part_number = c->midr & ARM_CPU_PART_MASK;
 
-    PRINT_CPUID_REG32("Main ID Register", midr);
-    PRINT_CPUID_REG32("Cache Type Register", ctr);
-    PRINT_CPUID_REG32("TCM Type Register", tcmtr);
-    PRINT_CPUID_REG32("TLB Type Register", tlbtr);
+    PRINT_CPUID_REG32("Main ID", midr);
+    PRINT_CPUID_REG32("Cache Type", ctr);
+    PRINT_CPUID_REG32("TCM Type", tcmtr);
+    PRINT_CPUID_REG32("TLB Type", tlbtr);
     if (part_number == ARM_CPU_PART_ARM_CORTEX_A53) {
-        PRINT_CPUID_REG32("Multiprocessor Affinity Register", mpidr);
-        PRINT_CPUID_REG32("Revision ID Register", revidr);
+        PRINT_CPUID_REG32("Multiprocessor Affinity", mpidr);
+        PRINT_CPUID_REG32("Revision ID", revidr);
     }
 
-    PRINT_CPUID_REG32("Processor Feature Register 0", id_pfr0);
-    PRINT_CPUID_REG32("Processor Feature Register 1", id_pfr1);
-    PRINT_CPUID_REG32("Debug Feature Register 0", id_dfr0);
-    PRINT_CPUID_REG32("Auxiliary Feature Register 0", id_afr0);
-    PRINT_CPUID_REG32("Memory Model Feature Register 0", id_mmfr0);
-    PRINT_CPUID_REG32("Memory Model Feature Register 1", id_mmfr1);
-    PRINT_CPUID_REG32("Memory Model Feature Register 2", id_mmfr2);
-    PRINT_CPUID_REG32("Memory Model Feature Register 3", id_mmfr3);
+    PRINT_CPUID_REG32("Processor Feature 0", id_pfr0);
+    PRINT_CPUID_REG32("Processor Feature 1", id_pfr1);
+    PRINT_CPUID_REG32("Debug Feature 0", id_dfr0);
+    PRINT_CPUID_REG32("Auxiliary Feature 0", id_afr0);
+    PRINT_CPUID_REG32("Memory Model Feature 0", id_mmfr0);
+    PRINT_CPUID_REG32("Memory Model Feature 1", id_mmfr1);
+    PRINT_CPUID_REG32("Memory Model Feature 2", id_mmfr2);
+    PRINT_CPUID_REG32("Memory Model Feature 3", id_mmfr3);
 
-    PRINT_CPUID_REG32("Instruction Set Attributes Register 0", id_isar0);
-    PRINT_CPUID_REG32("Instruction Set Attributes Register 1", id_isar1);
-    PRINT_CPUID_REG32("Instruction Set Attributes Register 2", id_isar2);
-    PRINT_CPUID_REG32("Instruction Set Attributes Register 3", id_isar3);
-    PRINT_CPUID_REG32("Instruction Set Attributes Register 4", id_isar4);
-    PRINT_CPUID_REG32("Instruction Set Attributes Register 5", id_isar5);
+    PRINT_CPUID_REG32("Instruction Set Attributes 0", id_isar0);
+    PRINT_CPUID_REG32("Instruction Set Attributes 1", id_isar1);
+    PRINT_CPUID_REG32("Instruction Set Attributes 2", id_isar2);
+    PRINT_CPUID_REG32("Instruction Set Attributes 3", id_isar3);
+    PRINT_CPUID_REG32("Instruction Set Attributes 4", id_isar4);
+    PRINT_CPUID_REG32("Instruction Set Attributes 5", id_isar5);
 
     if (part_number == ARM_CPU_PART_ARM_CORTEX_A53) {
-        PRINT_CPUID_REG32("Cache Size ID Register", ccsidr);
-        PRINT_CPUID_REG32("Cache Level ID Register", clidr);
-        PRINT_CPUID_REG32("Auxiliary ID Register", aidr);
+        PRINT_CPUID_REG32("Cache Size ID", ccsidr);
+        PRINT_CPUID_REG32("Cache Level ID", clidr);
+        PRINT_CPUID_REG32("Auxiliary ID", aidr);
 
-        PRINT_CPUID_REG32("Cache Size Selection Reigster", csselr);
+        PRINT_CPUID_REG32("Cache Size Selection", csselr);
     }
 
     free(c);
