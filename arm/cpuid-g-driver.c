@@ -1,6 +1,6 @@
 /* Print CPUID the right way
  *
- * Copyright (c) 2014, Evgeny Yulyugin.
+ * Copyright (c) 2014, Evgenii Iuliugin.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -35,7 +35,7 @@
 #include "asm-inline.h"
 
 MODULE_LICENSE("BSD 2-Clause");
-MODULE_AUTHOR("Evgeny Yulyugin <yulyugin@gmail.com>");
+MODULE_AUTHOR("Evgenii Iuliugin <yulyugin@gmail.com>");
 MODULE_DESCRIPTION("cpuid-g");
 
 static int cpuid_g_open(struct inode *, struct file *);
