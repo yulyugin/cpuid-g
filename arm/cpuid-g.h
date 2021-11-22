@@ -64,43 +64,43 @@ typedef struct arm32_cpuid {
 } arm32_cpuid_t;
 
 typedef struct arm64_cpuid {
-    uint32_t midr_el1;
-    uint64_t mpidr_el1;
-    uint32_t revidr_el1;
+    uint32_t midr;
+    uint64_t mpidr;
+    uint32_t revidr;
 
-    uint32_t id_pfr0_el1;
-    uint32_t id_pfr1_el1;
-    uint32_t id_dfr0_el1;
-    uint32_t id_afr0_el1;
-    uint32_t id_mmfr0_el1;
-    uint32_t id_mmfr1_el1;
-    uint32_t id_mmfr2_el1;
-    uint32_t id_mmfr3_el1;
+    uint32_t id_pfr0;
+    uint32_t id_pfr1;
+    uint32_t id_dfr0;
+    uint32_t id_afr0;
+    uint32_t id_mmfr0;
+    uint32_t id_mmfr1;
+    uint32_t id_mmfr2;
+    uint32_t id_mmfr3;
 
-    uint32_t id_isar0_el1;
-    uint32_t id_isar1_el1;
-    uint32_t id_isar2_el1;
-    uint32_t id_isar3_el1;
-    uint32_t id_isar4_el1;
-    uint32_t id_isar5_el1;
+    uint32_t id_isar0;
+    uint32_t id_isar1;
+    uint32_t id_isar2;
+    uint32_t id_isar3;
+    uint32_t id_isar4;
+    uint32_t id_isar5;
 
-    uint64_t id_aa64pfr0_el1;
-    uint64_t id_aa64pfr1_el1;
-    uint64_t id_aa64dfr0_el1;
-    uint64_t id_aa64dfr1_el1;
-    uint64_t id_aa64afr0_el1;
-    uint64_t id_aa64afr1_el1;
-    uint64_t id_aa64isar0_el1;
-    uint64_t id_aa64isar1_el1;
-    uint64_t id_aa64mmfr0_el1;
-    uint64_t id_aa64mmfr1_el1;
+    uint64_t id_aa64pfr0;
+    uint64_t id_aa64pfr1;
+    uint64_t id_aa64dfr0;
+    uint64_t id_aa64dfr1;
+    uint64_t id_aa64afr0;
+    uint64_t id_aa64afr1;
+    uint64_t id_aa64isar0;
+    uint64_t id_aa64isar1;
+    uint64_t id_aa64mmfr0;
+    uint64_t id_aa64mmfr1;
 
-    uint32_t ccsidr_el1;
-    uint64_t clidr_el1;
-    uint32_t aidr_el1;
-    uint32_t csselr_el1;
-    uint32_t ctr_el0;
-    uint32_t dczid_el0;
+    uint32_t ccsidr;
+    uint64_t clidr;
+    uint32_t aidr;
+    uint32_t csselr;
+    uint32_t ctr;
+    uint32_t dczid;
 } arm64_cpuid_t;
 
 #endif  /* ARM_CPUID_G_H */

@@ -138,43 +138,43 @@ print_arm64_cpuid()
     if (get_cpuid(c, sizeof *c) < 0)
         return 1;
 
-    PRINT_CPUID_REG32("Main ID", midr_el1);
-    PRINT_CPUID_REG64("Multiprocessor Affinity", mpidr_el1);
-    PRINT_CPUID_REG32("Revision ID", revidr_el1);
+    PRINT_CPUID_REG32("Main ID", midr);
+    PRINT_CPUID_REG64("Multiprocessor Affinity", mpidr);
+    PRINT_CPUID_REG32("Revision ID", revidr);
 
-    PRINT_CPUID_REG32("Aarch32 Processor Feature 0", id_pfr0_el1);
-    PRINT_CPUID_REG32("Aarch32 Processor Feature 1", id_pfr1_el1);
-    PRINT_CPUID_REG32("Aarch32 Debug Feature 0", id_dfr0_el1);
-    PRINT_CPUID_REG32("Aarch32 Auxiliary Feature 0", id_afr0_el1);
-    PRINT_CPUID_REG32("Aarch32 Memory Model Feature 0", id_mmfr0_el1);
-    PRINT_CPUID_REG32("Aarch32 Memory Model Feature 1", id_mmfr1_el1);
-    PRINT_CPUID_REG32("Aarch32 Memory Model Feature 2", id_mmfr2_el1);
-    PRINT_CPUID_REG32("Aarch32 Memory Model Feature 3", id_mmfr3_el1);
+    PRINT_CPUID_REG32("Aarch32 Processor Feature 0", id_pfr0);
+    PRINT_CPUID_REG32("Aarch32 Processor Feature 1", id_pfr1);
+    PRINT_CPUID_REG32("Aarch32 Debug Feature 0", id_dfr0);
+    PRINT_CPUID_REG32("Aarch32 Auxiliary Feature 0", id_afr0);
+    PRINT_CPUID_REG32("Aarch32 Memory Model Feature 0", id_mmfr0);
+    PRINT_CPUID_REG32("Aarch32 Memory Model Feature 1", id_mmfr1);
+    PRINT_CPUID_REG32("Aarch32 Memory Model Feature 2", id_mmfr2);
+    PRINT_CPUID_REG32("Aarch32 Memory Model Feature 3", id_mmfr3);
 
-    PRINT_CPUID_REG32("Aarch32 Instruction Set Attribute 0", id_isar0_el1);
-    PRINT_CPUID_REG32("Aarch32 Instruction Set Attribute 1", id_isar1_el1);
-    PRINT_CPUID_REG32("Aarch32 Instruction Set Attribute 2", id_isar2_el1);
-    PRINT_CPUID_REG32("Aarch32 Instruction Set Attribute 3", id_isar3_el1);
-    PRINT_CPUID_REG32("Aarch32 Instruction Set Attribute 4", id_isar4_el1);
-    PRINT_CPUID_REG32("Aarch32 Instruction Set Attribute 5", id_isar5_el1);
+    PRINT_CPUID_REG32("Aarch32 Instruction Set Attribute 0", id_isar0);
+    PRINT_CPUID_REG32("Aarch32 Instruction Set Attribute 1", id_isar1);
+    PRINT_CPUID_REG32("Aarch32 Instruction Set Attribute 2", id_isar2);
+    PRINT_CPUID_REG32("Aarch32 Instruction Set Attribute 3", id_isar3);
+    PRINT_CPUID_REG32("Aarch32 Instruction Set Attribute 4", id_isar4);
+    PRINT_CPUID_REG32("Aarch32 Instruction Set Attribute 5", id_isar5);
 
-    PRINT_CPUID_REG64("Aarch64 Processor Feature 0", id_aa64pfr0_el1);
-    PRINT_CPUID_REG64("Aarch64 Processor Feature 1", id_aa64pfr1_el1);
-    PRINT_CPUID_REG64("Aarch64 Debug Feature 0", id_aa64dfr0_el1);
-    PRINT_CPUID_REG64("Aarch64 Debug Feature 1", id_aa64dfr1_el1);
-    PRINT_CPUID_REG64("Aarch64 Auxuliary Feature 0", id_aa64afr0_el1);
-    PRINT_CPUID_REG64("Aarch64 Auxuliary Feature 1", id_aa64afr1_el1);
-    PRINT_CPUID_REG64("Aarch64 Instruction Set Attribute 0", id_aa64isar0_el1);
-    PRINT_CPUID_REG64("Aarch64 Instruction Set Attribute 1", id_aa64isar1_el1);
-    PRINT_CPUID_REG64("Aarch64 Memory Model Feature 0", id_aa64mmfr0_el1);
-    PRINT_CPUID_REG64("Aarch64 Memory Model Feature 1", id_aa64mmfr1_el1);
+    PRINT_CPUID_REG64("Aarch64 Processor Feature 0", id_aa64pfr0);
+    PRINT_CPUID_REG64("Aarch64 Processor Feature 1", id_aa64pfr1);
+    PRINT_CPUID_REG64("Aarch64 Debug Feature 0", id_aa64dfr0);
+    PRINT_CPUID_REG64("Aarch64 Debug Feature 1", id_aa64dfr1);
+    PRINT_CPUID_REG64("Aarch64 Auxuliary Feature 0", id_aa64afr0);
+    PRINT_CPUID_REG64("Aarch64 Auxuliary Feature 1", id_aa64afr1);
+    PRINT_CPUID_REG64("Aarch64 Instruction Set Attribute 0", id_aa64isar0);
+    PRINT_CPUID_REG64("Aarch64 Instruction Set Attribute 1", id_aa64isar1);
+    PRINT_CPUID_REG64("Aarch64 Memory Model Feature 0", id_aa64mmfr0);
+    PRINT_CPUID_REG64("Aarch64 Memory Model Feature 1", id_aa64mmfr1);
 
-    PRINT_CPUID_REG32("Cache Size ID Registetr", ccsidr_el1);
-    PRINT_CPUID_REG64("Cache Level ID", clidr_el1);
-    PRINT_CPUID_REG32("Auxiliary ID", aidr_el1);
-    PRINT_CPUID_REG32("Cache Size Selection", csselr_el1);
-    PRINT_CPUID_REG32("Cache Type", ctr_el0);
-    PRINT_CPUID_REG32("Data Cache Zero ID", dczid_el0);
+    PRINT_CPUID_REG32("Cache Size ID Registetr", ccsidr);
+    PRINT_CPUID_REG64("Cache Level ID", clidr);
+    PRINT_CPUID_REG32("Auxiliary ID", aidr);
+    PRINT_CPUID_REG32("Cache Size Selection", csselr);
+    PRINT_CPUID_REG32("Cache Type", ctr);
+    PRINT_CPUID_REG32("Data Cache Zero ID", dczid);
 
     free(c);
     return 0;

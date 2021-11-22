@@ -97,43 +97,43 @@ arm64_cpuid_t arm64_cpuid;
 static void
 read_arm64_cpuid(void)
 {
-    arm64_cpuid.midr_el1 = MRS(MIDR_EL1);
-    arm64_cpuid.mpidr_el1 = MRS(MPIDR_EL1);
-    arm64_cpuid.revidr_el1 = MRS(REVIDR_EL1);
+    arm64_cpuid.midr = MRS(MIDR_EL1);
+    arm64_cpuid.mpidr = MRS(MPIDR_EL1);
+    arm64_cpuid.revidr = MRS(REVIDR_EL1);
 
-    arm64_cpuid.id_pfr0_el1 = MRS(ID_PFR0_EL1);
-    arm64_cpuid.id_pfr1_el1 = MRS(ID_PFR1_EL1);
-    arm64_cpuid.id_dfr0_el1 = MRS(ID_DFR0_EL1);
-    arm64_cpuid.id_afr0_el1 = MRS(ID_AFR0_EL1);
-    arm64_cpuid.id_mmfr0_el1 = MRS(ID_MMFR0_EL1);
-    arm64_cpuid.id_mmfr1_el1 = MRS(ID_MMFR1_EL1);
-    arm64_cpuid.id_mmfr2_el1 = MRS(ID_MMFR2_EL1);
-    arm64_cpuid.id_mmfr3_el1 = MRS(ID_MMFR3_EL1);
+    arm64_cpuid.id_pfr0 = MRS(ID_PFR0_EL1);
+    arm64_cpuid.id_pfr1 = MRS(ID_PFR1_EL1);
+    arm64_cpuid.id_dfr0 = MRS(ID_DFR0_EL1);
+    arm64_cpuid.id_afr0 = MRS(ID_AFR0_EL1);
+    arm64_cpuid.id_mmfr0 = MRS(ID_MMFR0_EL1);
+    arm64_cpuid.id_mmfr1 = MRS(ID_MMFR1_EL1);
+    arm64_cpuid.id_mmfr2 = MRS(ID_MMFR2_EL1);
+    arm64_cpuid.id_mmfr3 = MRS(ID_MMFR3_EL1);
 
-    arm64_cpuid.id_isar0_el1 = MRS(ID_ISAR0_EL1);
-    arm64_cpuid.id_isar1_el1 = MRS(ID_ISAR1_EL1);
-    arm64_cpuid.id_isar2_el1 = MRS(ID_ISAR2_EL1);
-    arm64_cpuid.id_isar3_el1 = MRS(ID_ISAR3_EL1);
-    arm64_cpuid.id_isar4_el1 = MRS(ID_ISAR4_EL1);
-    arm64_cpuid.id_isar5_el1 = MRS(ID_ISAR5_EL1);
+    arm64_cpuid.id_isar0 = MRS(ID_ISAR0_EL1);
+    arm64_cpuid.id_isar1 = MRS(ID_ISAR1_EL1);
+    arm64_cpuid.id_isar2 = MRS(ID_ISAR2_EL1);
+    arm64_cpuid.id_isar3 = MRS(ID_ISAR3_EL1);
+    arm64_cpuid.id_isar4 = MRS(ID_ISAR4_EL1);
+    arm64_cpuid.id_isar5 = MRS(ID_ISAR5_EL1);
 
-    arm64_cpuid.id_aa64pfr0_el1 = MRS(ID_AA64PFR0_EL1);
-    arm64_cpuid.id_aa64pfr1_el1 = MRS(ID_AA64PFR1_EL1);
-    arm64_cpuid.id_aa64dfr0_el1 = MRS(ID_AA64DFR0_EL1);
-    arm64_cpuid.id_aa64dfr1_el1 = MRS(ID_AA64DFR1_EL1);
-    arm64_cpuid.id_aa64afr0_el1 = MRS(ID_AA64AFR0_EL1);
-    arm64_cpuid.id_aa64afr1_el1 = MRS(ID_AA64AFR1_EL1);
-    arm64_cpuid.id_aa64isar0_el1 = MRS(ID_AA64ISAR0_EL1);
-    arm64_cpuid.id_aa64isar1_el1 = MRS(ID_AA64ISAR1_EL1);
-    arm64_cpuid.id_aa64mmfr0_el1 = MRS(ID_AA64MMFR0_EL1);
-    arm64_cpuid.id_aa64mmfr1_el1 = MRS(ID_AA64MMFR1_EL1);
+    arm64_cpuid.id_aa64pfr0 = MRS(ID_AA64PFR0_EL1);
+    arm64_cpuid.id_aa64pfr1 = MRS(ID_AA64PFR1_EL1);
+    arm64_cpuid.id_aa64dfr0 = MRS(ID_AA64DFR0_EL1);
+    arm64_cpuid.id_aa64dfr1 = MRS(ID_AA64DFR1_EL1);
+    arm64_cpuid.id_aa64afr0 = MRS(ID_AA64AFR0_EL1);
+    arm64_cpuid.id_aa64afr1 = MRS(ID_AA64AFR1_EL1);
+    arm64_cpuid.id_aa64isar0 = MRS(ID_AA64ISAR0_EL1);
+    arm64_cpuid.id_aa64isar1 = MRS(ID_AA64ISAR1_EL1);
+    arm64_cpuid.id_aa64mmfr0 = MRS(ID_AA64MMFR0_EL1);
+    arm64_cpuid.id_aa64mmfr1 = MRS(ID_AA64MMFR1_EL1);
 
-    arm64_cpuid.ccsidr_el1 = MRS(CCSIDR_EL1);
-    arm64_cpuid.clidr_el1 = MRS(CLIDR_EL1);
-    arm64_cpuid.aidr_el1 = MRS(AIDR_EL1);
-    arm64_cpuid.csselr_el1 = MRS(CSSELR_EL1);
-    arm64_cpuid.ctr_el0 = MRS(CTR_EL0);
-    arm64_cpuid.dczid_el0 = MRS(DCZID_EL0);
+    arm64_cpuid.ccsidr = MRS(CCSIDR_EL1);
+    arm64_cpuid.clidr = MRS(CLIDR_EL1);
+    arm64_cpuid.aidr = MRS(AIDR_EL1);
+    arm64_cpuid.csselr = MRS(CSSELR_EL1);
+    arm64_cpuid.ctr = MRS(CTR_EL0);
+    arm64_cpuid.dczid = MRS(DCZID_EL0);
 }
 
 #else
