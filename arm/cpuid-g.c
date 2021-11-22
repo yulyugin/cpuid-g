@@ -44,7 +44,7 @@
     printf("%-40s %#10x\n", name_string, c->name);
 
 static int
-get_cpuid(arm32_cpuid_t *id)
+get_cpuid(void *id, size_t size)
 {
     int fd = open("/dev/cpuid-g", O_RDONLY);
     if (fd < 0) {
@@ -52,7 +52,7 @@ get_cpuid(arm32_cpuid_t *id)
         return -1;
     }
 
-    if (read(fd, id, sizeof *id) < 0) {
+    if (read(fd, id, size) < 0) {
         perror("read");
         return -1;
     }
@@ -72,7 +72,7 @@ print_arm32_cpuid(void)
         return 1;
     }
 
-    if (get_cpuid(c) < 0)
+    if (get_cpuid(c, sizeof *c) < 0)
         return 1;
 
     uint32_t implementer = c->midr >> 24;
@@ -126,6 +126,16 @@ print_arm32_cpuid(void)
 static int
 print_arm64_cpuid()
 {
+    arm64_cpuid_t *c = (arm64_cpuid_t *)calloc(1, sizeof *c);
+    if (!c) {
+        perror("calloc");
+        return 1;
+    }
+
+    if (get_cpuid(c, sizeof *c) < 0)
+        return 1;
+
+    free(c);
     return 0;
 }
 
