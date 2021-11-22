@@ -57,15 +57,47 @@ static struct miscdevice cpuid_g_dev = {
     &fops
 };
 
-arm32_cpuid_t arm32_cpuid;
-
 static int __init
 cpuid_g_init(void)
 {
-    uint32_t part_number;
     int ret = misc_register(&cpuid_g_dev);
     if (ret)
         printk(KERN_ERR "Unable to register cpuid-g device\n");
+
+    return ret;
+}
+
+static void __exit
+cpuid_g_exit(void)
+{
+    misc_deregister(&cpuid_g_dev);
+}
+
+module_init(cpuid_g_init);
+module_exit(cpuid_g_exit);
+
+static int
+cpuid_g_open(struct inode *inode, struct file *file)
+{
+    if (atomic_add_unless(&is_open, 1, 1) == 0)
+      return -EBUSY;
+    return 0;
+}
+
+static int
+cpuid_g_release(struct inode *inode, struct file *file)
+{
+    atomic_dec(&is_open);
+    return 0;
+}
+
+#ifndef CONFIG_ARM64
+arm32_cpuid_t arm32_cpuid;
+
+static void
+read_arm32_cpuid(void)
+{
+    uint32_t part_number;
 
     arm32_cpuid.midr = CR0_REG(0);
     arm32_cpuid.ctr = CR0_REG(1);
@@ -101,45 +133,27 @@ cpuid_g_init(void)
 
         arm32_cpuid.csselr = MRC_2_0(0);
     }
-
-    return ret;
 }
-
-static void __exit
-cpuid_g_exit(void)
-{
-    misc_deregister(&cpuid_g_dev);
-}
-
-module_init(cpuid_g_init);
-module_exit(cpuid_g_exit);
-
-static int
-cpuid_g_open(struct inode *inode, struct file *file)
-{
-    if (atomic_add_unless(&is_open, 1, 1) == 0)
-      return -EBUSY;
-    return 0;
-}
-
-static int
-cpuid_g_release(struct inode *inode, struct file *file)
-{
-    atomic_dec(&is_open);
-    return 0;
-}
+#endif  /* CONFIG_ARM64 */
 
 static ssize_t
 cpuid_g_read(struct file *filp, char *buffer, size_t length, loff_t *offset)
 {
     int not_copied = 0;
 
+#ifndef CONFIG_ARM64
+    void *cpuid = (void *)&arm32_cpuid;
+    unsigned long size = sizeof arm32_cpuid;
+    read_arm32_cpuid();
+#endif
+
     if (length < 0)
         return 0;
 
-    if (length > sizeof arm32_cpuid)
-        length = sizeof arm32_cpuid;
+    if (length > size)
+        length = size;
 
-    not_copied = copy_to_user(buffer, &arm32_cpuid, length);
+    not_copied = copy_to_user(buffer, cpuid, length);
+
     return length - not_copied;
 }
