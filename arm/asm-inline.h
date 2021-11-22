@@ -44,4 +44,12 @@
 #define MRC_1_0(op2) MRC_OP1_CRM_OP2(1, 0, op2)
 #define MRC_2_0(op2) MRC_OP1_CRM_OP2(2, 0, op2)
 
+#define MRS(id) ({         \
+    uint64_t r;            \
+    __asm__ __volatile__ ( \
+        "mrs %0, " #id     \
+        : "=r"(r));        \
+    r;                     \
+})
+
 #endif  /* ARM_ASM_INLINE_H */
