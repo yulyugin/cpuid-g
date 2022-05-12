@@ -1,0 +1,13 @@
+all: cpuid-g
+
+driver:
+	make -C freebsd
+
+driver-clean:
+	make -C freebsd clean
+
+cpuid-g: cpuid-g.c driver
+	gcc -Werror cpuid-g.c -o cpuid-g
+
+clean: driver-clean
+	rm -rf cpuid-g
