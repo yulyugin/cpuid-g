@@ -10,3 +10,4 @@ cpuid-g
 *.order
 .tmp_versions
 *.exe
+*~
