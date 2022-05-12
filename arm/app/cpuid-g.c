@@ -45,7 +45,7 @@
     printf("%-40s %#18x\n", name_string, c->name);
 
 #define PRINT_CPUID_REG64(name_string, name) \
-    printf("%-40s %18" PRIu64 "\n", name_string, c->name);
+    printf("%-40s %#18" PRIx64 "\n", name_string, c->name);
 
 static int
 get_cpuid(void *id, size_t size)
