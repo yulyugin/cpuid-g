@@ -5,7 +5,7 @@ if [ `id -u` != 0 ]; then
    SUDO="sudo"
 fi
 
-if [ $OSTYPE = "FreeBSD" ]; then
+if [ "$OSTYPE" = "FreeBSD" ]; then
     SUDO=$SUDO ./freebsd/cpuid-g.sh
     exit
 fi
