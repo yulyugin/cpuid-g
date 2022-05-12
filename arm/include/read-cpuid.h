@@ -30,7 +30,11 @@
 #include "cpuid-g.h"
 #include "asm-inline.h"
 
-#ifdef CONFIG_ARM64
+#if defined(__aarch64__) || defined(CONFIG_ARM64)
+#define CPUID_G_ARM64
+#endif
+
+#ifdef CPUID_G_ARM64
 arm64_cpuid_t arm64_cpuid;
 
 static void
@@ -75,7 +79,7 @@ read_arm64_cpuid(void)
     arm64_cpuid.dczid = MRS(DCZID_EL0);
 }
 
-#else
+#else  // CPUID_G_ARM64
 
 arm32_cpuid_t arm32_cpuid;
 
@@ -119,7 +123,7 @@ read_arm32_cpuid(void)
         arm32_cpuid.csselr = MRC_2_0(0);
     }
 }
-#endif  /* CONFIG_ARM64 */
+#endif  /* CPUID_G_ARM64 */
 
 #endif  /* CPUID_G_ARM_READ_CPUID_H */
 

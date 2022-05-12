@@ -73,7 +73,7 @@ cpuid_g_read(struct cdev *dev __unused, struct uio *uio, int ioflag __unused)
     int error = 0;
     size_t length = uio->uio_resid;
 
-#ifdef CONFIG_ARM64
+#ifdef CPUID_G_ARM64
     void *cpuid = (void *)&arm64_cpuid;
     unsigned long size = sizeof arm64_cpuid;
     read_arm64_cpuid();
@@ -100,4 +100,3 @@ cpuid_g_open(struct cdev *dev __unused, int oflags __unused, int devtype __unuse
 }
 
 DEV_MODULE(cpuid_g, cpuid_g_loader, NULL);
-
