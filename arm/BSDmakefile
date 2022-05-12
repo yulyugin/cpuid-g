@@ -1,13 +1,16 @@
-all: cpuid-g
+all: app driver
+clean: clean-app clean-driver
+
+app:
+	$(MAKE) -C app
+
+clean-app:
+	$(MAKE) -C app clean
+
+.PHONY: app
 
 driver:
-	make -C freebsd
+	$(MAKE) -C freebsd
 
-driver-clean:
-	make -C freebsd clean
-
-cpuid-g: cpuid-g.c driver
-	gcc -Werror cpuid-g.c -o cpuid-g
-
-clean: driver-clean
-	rm -rf cpuid-g
+clean-driver:
+	$(MAKE) -C freebsd clean
