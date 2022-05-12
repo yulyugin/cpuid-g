@@ -1,0 +1,4 @@
+*.kld
+export_syms
+machine
+opt_global.h
