@@ -25,10 +25,14 @@
  */
 
 #include <sys/types.h>
+#include <sys/systm.h>
 #include <sys/param.h>
 #include <sys/module.h>
 #include <sys/kernel.h>
 #include <sys/conf.h>
+#include <sys/uio.h>
+
+#include "read-cpuid.h"
 
 static d_open_t cpuid_g_open;
 static d_read_t cpuid_g_read;
@@ -66,7 +70,26 @@ cpuid_g_loader(struct module *m __unused, int what, void *arg __unused)
 static int
 cpuid_g_read(struct cdev *dev __unused, struct uio *uio, int ioflag __unused)
 {
-    return 0;
+    int error = 0;
+    size_t length = uio->uio_resid;
+
+#ifdef CONFIG_ARM64
+    void *cpuid = (void *)&arm64_cpuid;
+    unsigned long size = sizeof arm64_cpuid;
+    read_arm64_cpuid();
+#else
+    void *cpuid = (void *)&arm32_cpuid;
+    unsigned long size = sizeof arm32_cpuid;
+    read_arm32_cpuid();
+#endif
+
+    if (length > size)
+        length = size;
+
+    if ((error = uiomove(cpuid, length, uio)) != 0)
+        printf("uiomove failed\n");
+
+    return error;
 }
 
 static int
@@ -77,3 +100,4 @@ cpuid_g_open(struct cdev *dev __unused, int oflags __unused, int devtype __unuse
 }
 
 DEV_MODULE(cpuid_g, cpuid_g_loader, NULL);
+

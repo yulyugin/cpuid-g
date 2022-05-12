@@ -4,6 +4,7 @@ ARCH != uname -m
 CFLAGS += -DCONFIG_ARM64
 .endif
 
+CFLAGS+=-I../include
 SRCS=cpuid-g.c
 KMOD=cpuid-g
 
