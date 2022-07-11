@@ -5,8 +5,8 @@ if [ $OSTYPE == "FreeBSD" ]; then
     exit
 fi
 
-G_DRIVER="cpuid-g-driver.ko"
-CPUID_G="cpuid-g"
+G_DRIVER="linux/cpuid-g.ko"
+CPUID_G="app/cpuid-g"
 
 [ -e $G_DRIVER ] || { echo "$G_DRIVER does not exist" ; exit 1 ; }
 [ -e $CPUID_G ] || { echo "$CPUID_G does not exist" ; exit 1 ; }
