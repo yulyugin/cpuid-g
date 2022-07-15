@@ -27,6 +27,10 @@
 #ifndef ARM_CPUID_G_H
 #define ARM_CPUID_G_H
 
+#if defined(__aarch64__) && !defined(CONFIG_ARM64)
+#define CONFIG_ARM64
+#endif
+
 #define ARM_CPU_PART_MASK           0xff00fff0
 
 #define ARM_CPU_PART_ARM1176        0x4100b760

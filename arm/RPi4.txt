@@ -1,0 +1,34 @@
+Vendor: ARM
+Main ID                                          0x410fd083
+Multiprocessor Affinity                          0x80000001
+Revision ID                                               0
+Aarch32 Processor Feature 0                           0x131
+Aarch32 Processor Feature 1                         0x11011
+Aarch32 Debug Feature 0                           0x3010066
+Aarch32 Auxiliary Feature 0                               0
+Aarch32 Memory Model Feature 0                   0x10201105
+Aarch32 Memory Model Feature 1                   0x40000000
+Aarch32 Memory Model Feature 2                    0x1260000
+Aarch32 Memory Model Feature 3                    0x2102211
+Aarch32 Instruction Set Attribute 0               0x2101110
+Aarch32 Instruction Set Attribute 1              0x13112111
+Aarch32 Instruction Set Attribute 2              0x21232042
+Aarch32 Instruction Set Attribute 3               0x1112131
+Aarch32 Instruction Set Attribute 4                 0x11142
+Aarch32 Instruction Set Attribute 5                 0x10001
+Aarch64 Processor Feature 0                          0x2222
+Aarch64 Processor Feature 1                               0
+Aarch64 Debug Feature 0                          0x10305106
+Aarch64 Debug Feature 1                                   0
+Aarch64 Auxuliary Feature 0                               0
+Aarch64 Auxuliary Feature 1                               0
+Aarch64 Instruction Set Attribute 0                 0x10000
+Aarch64 Instruction Set Attribute 1                       0
+Aarch64 Memory Model Feature 0                       0x1124
+Aarch64 Memory Model Feature 1                            0
+Cache Size ID Registetr                          0x701fe00a
+Cache Level ID                                    0xa200023
+Auxiliary ID                                              0
+Cache Size Selection                                      0
+Cache Type                                       0x8444c004
+Data Cache Zero ID                                      0x4

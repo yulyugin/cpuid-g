@@ -44,7 +44,7 @@
     printf("%-40s %#18x\n", name_string, c->name);
 
 #define PRINT_CPUID_REG64(name_string, name) \
-    printf("%-40s %#18llx\n", name_string, c->name);
+    printf("%-40s %#18lx\n", name_string, c->name);
 
 static int
 get_cpuid(void *id, size_t size)
@@ -130,6 +130,7 @@ print_arm32_cpuid(void)
     }
 
     free(c);
+    return 0;
 }
 
 static int

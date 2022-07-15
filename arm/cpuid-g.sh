@@ -1,17 +1,34 @@
 #!/bin/sh
 
-G_DRIVER="cpuid-g-driver.ko"
+OS=$(uname)
+if [ "$OS" = "FreeBSD" ] ; then
+    G_DRIVER="cpuid.ko"
+else
+    G_DRIVER="cpuid-g-driver.ko"
+fi
 CPUID_G="cpuid-g"
 
 [ -e $G_DRIVER ] || { echo "$G_DRIVER does not exist" ; exit 1 ; }
 [ -e $CPUID_G ] || { echo "$CPUID_G does not exist" ; exit 1 ; }
 
 SUDO=""
-if [ ! -z `id -u` ]; then
-   SUDO="sudo"
+if [ "$OS" = "FreeBSD" ] ; then
+    if [ `id -u` -ne 0 ]; then
+	echo "need sudo"
+	SUDO="sudo"
+    fi
+else
+    if [ ! -z `id -u` ]; then
+	echo "need sudo"
+	SUDO="sudo"
+    fi
 fi
 
-$SUDO /sbin/insmod $G_DRIVER
+if [ "$OS" = "FreeBSD" ] ; then
+    $SUDO /sbin/kldload ./$G_DRIVER
+else
+    $SUDO /sbin/insmod $G_DRIVER
+fi
 
 RET=$?
 if [ $RET -ne 0 ]; then
@@ -21,7 +38,11 @@ fi
 
 $SUDO `readlink -f $CPUID_G`
 
-$SUDO /sbin/rmmod $G_DRIVER
+if [ "$OS" = "FreeBSD" ] ; then
+    $SUDO /sbin/kldunload $G_DRIVER
+else
+    $SUDO /sbin/rmmod $G_DRIVER
+fi
 
 RET=$?
 if [ $RET -ne 0 ]; then
