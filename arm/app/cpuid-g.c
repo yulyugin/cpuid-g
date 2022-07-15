@@ -130,6 +130,7 @@ print_arm32_cpuid(void)
     }
 
     free(c);
+    return 0;
 }
 
 static int
