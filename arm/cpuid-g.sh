@@ -1,11 +1,7 @@
 #!/bin/sh
 
 OS=$(uname)
-if [ "$OS" = "FreeBSD" ] ; then
-    G_DRIVER="cpuid.ko"
-else
-    G_DRIVER="cpuid-g-driver.ko"
-fi
+G_DRIVER="cpuid-g-driver.ko"
 CPUID_G="cpuid-g"
 
 [ -e $G_DRIVER ] || { echo "$G_DRIVER does not exist" ; exit 1 ; }
