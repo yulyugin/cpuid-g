@@ -1,7 +1,12 @@
 #!/bin/sh
 
-if [ $OSTYPE == "FreeBSD" ]; then
-    ./freebsd/cpuid-g.sh
+SUDO=""
+if [ `id -u` != 0 ]; then
+   SUDO="sudo"
+fi
+
+if [ $OSTYPE = "FreeBSD" ]; then
+    SUDO=$SUDO ./freebsd/cpuid-g.sh
     exit
 fi
 
@@ -10,11 +15,6 @@ CPUID_G="app/cpuid-g"
 
 [ -e $G_DRIVER ] || { echo "$G_DRIVER does not exist" ; exit 1 ; }
 [ -e $CPUID_G ] || { echo "$CPUID_G does not exist" ; exit 1 ; }
-
-SUDO=""
-if [ ! -z `id -u` ]; then
-   SUDO="sudo"
-fi
 
 $SUDO /sbin/insmod $G_DRIVER
 

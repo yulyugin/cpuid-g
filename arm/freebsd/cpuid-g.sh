@@ -6,11 +6,6 @@ G_DRIVER="freebsd/cpuid-g.ko"
 [ -e $G_DRIVER ] || { echo "$G_DRIVER does not exist" ; exit 1 ; }
 [ -e $CPUID_G ] || { echo "$CPUID_G does not exist" ; exit 1 ; }
 
-SUDO=""
-if [ `id -u` != 0 ]; then
-   SUDO="sudo"
-fi
-
 $SUDO /sbin/kldload $G_DRIVER
 
 RET=$?
