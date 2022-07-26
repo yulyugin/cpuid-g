@@ -86,3 +86,4 @@ ia64/ : To build for Intel® IA-64 a.k.a. Intel® Itanium®, use a C++ compiler 
    | Architecture   | Chip
    | ---            | ---
    | ARM Cortex A53 | [BCM2837](dumps/arm/BCM2837%20(AArch64).md)
+   | ARM Cortex A72 | [BCM2711](dumps/arm/BCM2711.md)
